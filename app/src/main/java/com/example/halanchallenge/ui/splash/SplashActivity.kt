@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.halanchallenge.BuildConfig
 import com.example.halanchallenge.R
+import com.example.halanchallenge.utils.extensions.*
 import com.example.halanchallenge.app.HalanCoordinator
 import com.example.halanchallenge.app.HalanDirections
 import com.example.halanchallenge.databinding.ActivitySplashBinding
-import com.mohammedmorse.utils.extensions.ViewExtensions
 
 class SplashActivity : AppCompatActivity() {
 
@@ -64,9 +64,9 @@ class SplashActivity : AppCompatActivity() {
     }
 
     fun navigate() {
-        navigateDelay {
+/*        navigateDelay {
             HalanCoordinator.navigate(HalanDirections.Auth(this))
-        }
+        }*/
     }
 
     override fun onDestroy() {

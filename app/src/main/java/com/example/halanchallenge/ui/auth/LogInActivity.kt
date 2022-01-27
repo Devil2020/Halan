@@ -12,6 +12,8 @@ class LogInActivity : AppCompatActivity() {
 
     var binding: ActivityLogInBinding? = null
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding =
