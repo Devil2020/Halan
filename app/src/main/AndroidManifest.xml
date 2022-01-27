@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HalanChallenge">
 
-        <activity android:name=".ProductDetailsActivity"/>
-        <activity android:name=".ProductsListActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".ProductDetailsActivity" android:exported="true"/>
+        <activity android:name=".ProductsListActivity" android:exported="true"/>
+        <activity android:name=".LoginActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

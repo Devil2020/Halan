@@ -2,46 +2,72 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion ApplicationConfigration.CompileSdkVersion
 
     defaultConfig {
-        applicationId "com.example.halanchallenge"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        applicationId ApplicationConfigration.ApplicationId
+        minSdkVersion ApplicationConfigration.MinSdkVersion
+        targetSdkVersion ApplicationConfigration.CompileSdkVersion
+        versionCode ApplicationConfigration.VersionCode
+        versionName ApplicationConfigration.VersionName
+        testInstrumentationRunner TestInstrumentedRunner.Runner
     }
 
+    flavorDimensions "core"
+
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            minifyEnabled false
+            testCoverageEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
     }
+
+    productFlavors {
+
+        sharedTestingResources {
+            dimension "core"
+            applicationIdSuffix = ".mock"
+
+            buildConfigField("String", "LEFT", ApplicationConfigration.EnglishName)
+            buildConfigField("String", "RIGHT", ApplicationConfigration.ArabicName)
+            resValue("string", "app_name", ApplicationConfigration.ApplicationName)
+
+            buildConfigField("String", "BASE_URL", ApplicationConfigration.BaseUrl)
+            buildConfigField("String", "AUTH_URL", ApplicationConfigration.AuthUrl)
+            buildConfigField("String", "PRODUCTS_URL", ApplicationConfigration.ProductsUrl)
+
+        }
+
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 }
 
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation KotlinLibrary.Library
+    implementation AndroidLibrary.Core
+    implementation MaterialDesignLibraries.Libraries
 
     implementation 'com.google.code.gson:gson:2.8.7'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -50,4 +76,18 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.github.martinstamenkovski:ARIndicatorView:2.0.0'
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
+
+    // For Local Test
+
+    testImplementation TestingLibraries.Junit
+    testImplementation TestingLibraries.JunitExtensions
+    testImplementation TestingLibraries.JunitExtensions
+
+    // For Instrumented Test
+
+    androidTestImplementation TestingLibraries.Core
+    androidTestImplementation UITestingLibraries.Espresso
+    androidTestImplementation UITestingLibraries.AndroidXRuleTest
+
+
 }
