@@ -10,7 +10,7 @@ import com.example.halanchallenge.R
 import com.example.halanchallenge.app.HalanCoordinator
 import com.example.halanchallenge.app.HalanDirections
 import com.example.halanchallenge.databinding.ActivitySplashBinding
-import com.mohammedmorse.utils.extensions.*
+import com.mohammedmorse.utils.extensions.ViewExtensions
 
 class SplashActivity : AppCompatActivity() {
 
@@ -19,6 +19,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+
         binding?.apply {
             arabicName = BuildConfig.RIGHT
             englishName = BuildConfig.LEFT

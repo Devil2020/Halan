@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+<string name="login">تسجيل الدخول</string>
+<string name="user_name">اسم المستخدم</string>
+<string name="password">كلمه السر</string>
+<string name="my_products">منتجاتي</string>
+<string name="more">المزيد</string>
+<string name="back">رجوع</string>
+<string name="product_details">تفاصيل المنتج</string>
+<string name="description">الوصف</string>
+
+
+    <string name="wrong_username_label">* - اسم مستخدم غير صالح ، يجب إدخال اسم مستخدم بحد أدنى 4 أحرف له.</string>
+    <string name="wrong_password_label">* - كلمة المرور غير صحيحة ، يجب إدخال كلمة مرور لا تقل عن 8 أحرف لها.</string>
+</resources>

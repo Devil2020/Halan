@@ -1,10 +1,13 @@
 <resources>
-    <string name="login">تسجيل الدخول</string>
-    <string name="user_name">اسم المستخدم</string>
-    <string name="password">كلمه السر</string>
-    <string name="my_products">منتجاتي</string>
-    <string name="more">المزيد</string>
-    <string name="back">رجوع</string>
-    <string name="product_details">تفاصيل المنتج</string>
-    <string name="description">الوصف</string>
+    <string name="login">Login</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="my_products">My Products</string>
+    <string name="more">View More</string>
+    <string name="back">Back</string>
+    <string name="product_details">Product Details</string>
+    <string name="description">Description</string>
+
+    <string name="wrong_username_label">*- Invalid User-Name , You Should enter a User-Name with Minimum 4 characters for it .</string>
+    <string name="wrong_password_label">*- Invalid Password , You Should enter a Password with Minimum 8 characters for it .</string>
 </resources>
