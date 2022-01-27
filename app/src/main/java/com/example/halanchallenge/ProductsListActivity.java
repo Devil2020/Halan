@@ -15,6 +15,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bumptech.glide.Glide;
+import com.example.halanchallenge.domain.entities.login.LoginResponse;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -52,7 +53,7 @@ public class ProductsListActivity extends AppCompatActivity {
         userIV= findViewById(R.id.user_iv);
         logoutIV = findViewById(R.id.logoutIV);
 
-        Glide.with(this).load(loginResponse.profile.image).into(userIV);
+        Glide.with(this).load(loginResponse.getProfile().getImage()).into(userIV);
 
         productsListRV = findViewById(R.id.products_list_rv);
 
@@ -68,7 +69,7 @@ public class ProductsListActivity extends AppCompatActivity {
 
         AndroidNetworking.initialize(getApplicationContext());
         AndroidNetworking.get("https://assessment-sn12.halan.io/products")
-                .addHeaders("Authorization", "Bearer " + loginResponse.token)
+                .addHeaders("Authorization", "Bearer " + loginResponse.getToken())
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -94,9 +95,9 @@ public class ProductsListActivity extends AppCompatActivity {
                     }
                 });
 
-        userName.setText(loginResponse.profile.name);
-        phoneNumber.setText(loginResponse.profile.phone);
-        email.setText(loginResponse.profile.email);
+        userName.setText(loginResponse.getProfile().getName());
+        phoneNumber.setText(loginResponse.getProfile().getPhone());
+        email.setText(loginResponse.getProfile().getEmail());
 
 
     }

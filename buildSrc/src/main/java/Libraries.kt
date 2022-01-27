@@ -1,4 +1,3 @@
-
 object TestInstrumentedRunner {
     val Runner = "androidx.test.runner.AndroidJUnitRunner"
 }
@@ -11,7 +10,7 @@ object CustomPlugin {
 
     const val GradleVersion = "com.android.tools.build:gradle:${gradleVersion}"
     const val GradleKTlint = "org.jlleitschuh.gradle:ktlint-gradle:${ktlintVersion}"
-    const val KotlinPlugin ="org.jetbrains.kotlin:kotlin-gradle-plugin:${KotlinVersion}"
+    const val KotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${KotlinVersion}"
 
 }
 
@@ -19,26 +18,21 @@ object NetworkLibraries {
 
     val Retrofit = arrayListOf(
         "com.squareup.retrofit2:retrofit:${Versions.NetworkLibraries.RetrofitVersion}",
-        "com.squareup.retrofit2:converter-moshi:${Versions.NetworkLibraries.RetrofitVersion}",
-        "com.squareup.retrofit2:converter-scalars:${Versions.NetworkLibraries.RetrofitVersion}",
+        "com.squareup.retrofit2:converter-gson:${Versions.NetworkLibraries.GsonConverter}",
+        "com.google.code.gson:gson:${Versions.NetworkLibraries.Gson}" ,
         "com.squareup.okhttp3:okhttp:${Versions.NetworkLibraries.OkHttpVersion}",
         "com.squareup.okhttp3:logging-interceptor:${Versions.NetworkLibraries.OkHttpVersion}",
     )
 
 }
 
-object PreferenceLibraries {
-    const val Paper = "io.paperdb:paperdb:${Versions.Preference.PaperVersion}"
-    const val SharedPreference =
-        "androidx.preference:preference-ktx:${Versions.Preference.SharedPreferenceVersion}"
-    val DataStoreCore = arrayListOf(
-        "androidx.datastore:datastore:${Versions.Preference.DataStoreVersion}",
-        "androidx.datastore:datastore-core:${Versions.Preference.DataStoreVersion}",
+object Coroutine {
+
+    val Libraries = arrayListOf(
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.Kotlin.CoroutineVersion}",
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.Kotlin.CoroutineVersion}",
     )
-    const val PreferenceDataStore =
-        "androidx.datastore:datastore-preferences:${Versions.Preference.DataStoreVersion}"
-    const val ProtoBufsDataStore =
-        "com.google.protobuf:protobuf-javalite:${Versions.Preference.DataStoreVersion}"
+
 }
 
 object MaterialDesignLibraries {
@@ -99,14 +93,27 @@ object UITestingLibraries {
 }
 
 object AndroidLibrary {
-    val Core = "androidx.core:core-ktx:${Versions.Kotlin.CoreKtxVersion}"
+    const val Core = "androidx.core:core-ktx:${Versions.Kotlin.CoreKtxVersion}"
 }
 
 object KotlinLibrary {
-    val Library = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.Kotlin.KotlinVersion}"
+    const val Library = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.Kotlin.KotlinVersion}"
 }
 
-object AnalticsLibrary {
-    const val Flurry = "com.flurry.android:analytics:${Versions.Analtics.FlurryVersion}"
-}
+object Jetpack {
 
+
+    val LifeCycle = arrayListOf(
+        "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Jetpack.LifeCycleVersion}",
+        "androidx.lifecycle:lifecycle-extensions:${Versions.Jetpack.LifeCycleExtensionsVersion}",
+        "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.Jetpack.LifeCycleVersion}",
+        //for viewModelScope
+        "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.Jetpack.LifeCycleVersion}",
+        //for lifecycleScope
+        "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.Jetpack.LifeCycleVersion}",
+        "androidx.fragment:fragment:${Versions.Jetpack.FragmentKtxVersion}",
+        "androidx.fragment:fragment-ktx:${Versions.Jetpack.FragmentKtxVersion}",
+        "androidx.activity:activity-ktx:${Versions.Jetpack.ActivityKtxVersion}",
+    )
+
+}

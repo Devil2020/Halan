@@ -1,4 +1,4 @@
-package com.mohammedmorse.utils.extensions
+package com.example.halanchallenge.utils.extensions
 
 import android.animation.ValueAnimator
 import android.app.Activity

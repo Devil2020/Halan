@@ -1,33 +1,12 @@
+import com.google.gson.Gson
+
 object Versions {
 
     object NetworkLibraries {
         const val RetrofitVersion = "2.9.0"
         const val OkHttpVersion = "4.9.0"
-
-        const val IonVersion = "3.0.8"
-
-        const val FuelVersion = "2.3.1"
-
-        const val FastNetworkingVersion = "1.0.2"
-    }
-
-    object DataBase {
-        const val RoomVersion = "2.2.5"
-
-        const val SugarOrmVersion = "1.5"
-
-        const val SqlDelightVersion = "1.5.2"
-
-        const val RealMVersion = "10.9.0-SNAPSHOT"
-    }
-
-    object Preference {
-
-        const val PaperVersion = "2.7.1"
-        const val SharedPreferenceVersion = "1.1.1"
-
-        const val DataStoreVersion = "1.0.0"
-
+        const val GsonConverter = "2.9.0"
+        const val Gson = "2.8.8"
     }
 
     object MaterialDesign {
@@ -75,12 +54,18 @@ object Versions {
 
     }
 
-    object MultiDex {
-        const val Version = "1.0.3"
-    }
+    object Jetpack {
+        const val Pagination3Version = "3.1.0-alpha03"
+        const val NavigationVersion = "2.3.1"
 
-    object Analtics {
-        const val FlurryVersion = "12.1.0"
+        const val LifeCycleVersion = "2.4.0-alpha03"
+
+        const val LifeCycleExtensionsVersion = "2.2.0"
+
+        const val FragmentKtxVersion = "1.4.0-alpha05"
+        const val ActivityKtxVersion = "1.3.0"
+
+        const val WorkManagerVersion = "2.7.0"
     }
 
 }
