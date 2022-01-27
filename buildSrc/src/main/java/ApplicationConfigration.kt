@@ -17,9 +17,9 @@ object ApplicationConfigration {
 
     const val VersionName = "1.0.0"
 
-    const val ArabicName = "\"حالا\""
+    const val ArabicName = "\"حالاّ\""
 
-    const val EnglishName =  "\"halan\""
+    const val EnglishName =  "\"HALAN\""
 
     // If you want to test another website , you can change this link only
 

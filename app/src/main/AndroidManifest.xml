@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.halanchallenge">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,14 +12,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HalanChallenge">
-
-        <activity android:name=".ProductDetailsActivity" android:exported="true"/>
-        <activity android:name=".ProductsListActivity" android:exported="true"/>
-        <activity android:name=".LoginActivity" android:exported="true">
+        <activity
+            android:name=".ui.products.detail.ProductDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.products.list.ProductsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.auth.LogInActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ProductDetailsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ProductsListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+
         </activity>
     </application>
 
