@@ -6,6 +6,10 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 
+    <color name="weakwhite">#D5FFFFFF</color>
+
+
+    <color name="whitegray">#403F3F</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="accent">#00EC7D</color>

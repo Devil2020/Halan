@@ -8,6 +8,24 @@
     <string name="product_details">Product Details</string>
     <string name="description">Description</string>
 
+    <string name="helloMessage" >Hello %1$s </string>
+    <string name="happyReviewMessage" > Welcome to your products , Happy Browsing &#9995; </string>
+    <string name="toasterMessage" translatable="false"> %1$s &#9995; </string>
+    <string name="total_counts_of_words">Total Counts Of Words</string>
+    <string name="current_counts_of_words"> %1$s Words</string>
+    <string name="sort">Sort</string>
+    <string name="logout">Log Out</string>
+    <string name="loadingMessage">Please Wait Until Loading Words From The Website</string>
+    <string name="close">Close</string>
+    <string name="emptyHeader"> * Sorry , but there are no any words to display in general .</string>
+    <string name="emptyBody"> * You can change the Url of website by go to \n 1- buildSrc \n 2- ApplicationConfigration Class \n 3- Change on BaseUrl Variable .</string>
+    <string name="errorHeader"> * Sorry , but there is an Error happened .</string>
+    <string name="errorBody"> * Maybe it is the network , Pleace check your Connection and if it not work please try again later .</string>
+    <string name="tap_for_search">Tap for Search</string>
+    <string name="there_is_no_any_word_found">* There is no any word found .</string>
+    <string name="please_delete_the_word_and_search_with_another_word_to_test_the_functionality_of_searching">* Please delete the word and search with another word to test the search function, or you can add a new word if you have not added any.</string>
+
+
     <string name="wrong_username_label">*- Invalid User-Name , You Should enter a User-Name with Minimum 4 characters for it .</string>
     <string name="wrong_password_label">*- Invalid Password , You Should enter a Password with Minimum 8 characters for it .</string>
 </resources>

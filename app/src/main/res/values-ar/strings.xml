@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-<string name="login">تسجيل الدخول</string>
-<string name="user_name">اسم المستخدم</string>
-<string name="password">كلمه السر</string>
-<string name="my_products">منتجاتي</string>
-<string name="more">المزيد</string>
-<string name="back">رجوع</string>
-<string name="product_details">تفاصيل المنتج</string>
-<string name="description">الوصف</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="user_name">اسم المستخدم</string>
+    <string name="password">كلمه السر</string>
+    <string name="my_products">منتجاتي</string>
+    <string name="more">المزيد</string>
+    <string name="back">رجوع</string>
+    <string name="product_details">تفاصيل المنتج</string>
+    <string name="description">الوصف</string>
 
+
+    <string name="helloMessage">مرحبًا <b> mzelzoghbi </b>!</string>
+    <string name="happyReviewMessage"> مرحبًا بك في الصفحة الرئيسية , تقييم سعيد &#9995;  </string>
+    <string name="total_counts_of_words">إجمالي عدد الكلمات</string>
+    <string name="current_counts_of_words">  %1$s كلمه </string>
+    <string name="sort">ترتيب</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="loadingMessage">يرجى الانتظار حتى يتم تحميل الكلمات من الموقع</string>
+    <string name="close">إغلاق</string>
+    <string name="emptyHeader"> * معذرة ولكن لا توجد كلمات لعرضها بشكل عام.</string>
+    <string name="emptyBody"> * يمكنك تغيير عنوان URL لموقع الويب من خلال الانتقال إلى \n 1- buildSrc \n 2- فية ApplicationConfigration Class \n 3- التغيير في BaseUrl Variable.</string>
+    <string name="errorHeader"> * عذرا ، ولكن حدث خطأ.</string>
+    <string name="errorBody"> * ربما تكون هذه هي الشبكة ، يرجى التحقق من اتصالك وإذا لم يعمل يرجى المحاولة مرة أخرى لاحقًا.</string>
+    <string name="tap_for_search">اضغط للبحث</string>
+    <string name="there_is_no_any_word_found">* لم يتم العثور على أي كلمة.</string>
+    <string name="please_delete_the_word_and_search_with_another_word_to_test_the_functionality_of_searching">* يرجى حذف الكلمة والبحث بكلمة أخرى لاختبار وظيفة البحث.</string>
 
     <string name="wrong_username_label">* - اسم مستخدم غير صالح ، يجب إدخال اسم مستخدم بحد أدنى 4 أحرف له.</string>
     <string name="wrong_password_label">* - كلمة المرور غير صحيحة ، يجب إدخال كلمة مرور لا تقل عن 8 أحرف لها.</string>

@@ -7,4 +7,5 @@ import com.example.halanchallenge.domain.repository.IUserRepository
 class LoginViewModel(private val repository: IUserRepository) : ViewModel() {
 
 
+
 }

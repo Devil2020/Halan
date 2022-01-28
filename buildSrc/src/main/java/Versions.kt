@@ -4,7 +4,7 @@ object Versions {
 
     object NetworkLibraries {
         const val RetrofitVersion = "2.9.0"
-        const val OkHttpVersion = "4.9.0"
+        const val OkHttpVersion = "4.9.3"
         const val GsonConverter = "2.9.0"
         const val Gson = "2.8.8"
     }
@@ -48,9 +48,9 @@ object Versions {
 
     object Kotlin {
 
-        const val CoroutineVersion = "1.5.0"
-        const val KotlinVersion = "1.4.2"
-        const val CoreKtxVersion= "1.7.0-alpha01"
+        const val CoroutineVersion = "1.5.2"
+        const val KotlinVersion = "1.5.0"
+        const val CoreKtxVersion= "1.8.0-alpha03"
 
     }
 
@@ -58,12 +58,12 @@ object Versions {
         const val Pagination3Version = "3.1.0-alpha03"
         const val NavigationVersion = "2.3.1"
 
-        const val LifeCycleVersion = "2.4.0-alpha03"
+        const val LifeCycleVersion = "2.5.0-alpha01"
 
         const val LifeCycleExtensionsVersion = "2.2.0"
 
-        const val FragmentKtxVersion = "1.4.0-alpha05"
-        const val ActivityKtxVersion = "1.3.0"
+        const val FragmentKtxVersion = "1.5.0-alpha01"
+        const val ActivityKtxVersion = "1.4.0"
 
         const val WorkManagerVersion = "2.7.0"
     }
