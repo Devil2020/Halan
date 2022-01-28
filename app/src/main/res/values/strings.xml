@@ -26,6 +26,6 @@
     <string name="please_delete_the_word_and_search_with_another_word_to_test_the_functionality_of_searching">* Please delete the word and search with another word to test the search function, or you can add a new word if you have not added any.</string>
 
 
-    <string name="wrong_username_label">*- Invalid User-Name , You Should enter a User-Name with Minimum 4 characters for it .</string>
+    <string name="wrong_username_label">*- Invalid User-Name , You Should enter a User-Name with Minimum 6 characters for it and maximum 16 Character  .</string>
     <string name="wrong_password_label">*- Invalid Password , You Should enter a Password with Minimum 8 characters for it .</string>
 </resources>
