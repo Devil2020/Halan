@@ -1,5 +1,5 @@
 object TestInstrumentedRunner {
-    val Runner = "androidx.test.runner.AndroidJUnitRunner"
+    const val Runner = "androidx.test.runner.AndroidJUnitRunner"
 }
 
 object CustomPlugin {
@@ -46,6 +46,11 @@ object MaterialDesignLibraries {
         "com.google.android.material:material:${Versions.MaterialDesign.MaterialDesignVersion}"
     )
 
+    val CustomViews = arrayListOf(
+        "de.hdodenhof:circleimageview:${Versions.MaterialDesign.CirculeImageView}" ,
+        "com.github.martinstamenkovski:ARIndicatorView:${Versions.MaterialDesign.DotIndicator}"
+    )
+
 }
 
 object TestingLibraries {
@@ -83,7 +88,7 @@ object TestingLibraries {
 }
 
 object UITestingLibraries {
-    val Espresso = arrayListOf(
+   val Espresso = arrayListOf(
         "androidx.test.espresso:espresso-core:${Versions.UITesting.EspressoVersion}"
     )
     const val FragmentTest =

@@ -17,6 +17,9 @@ object Versions {
         const val RecyclerViewSelectionVersion = "1.1.0"
         const val CardViewVersion = "1.0.0"
         const val MaterialDesignVersion = "1.5.0-alpha05"
+
+        const val CirculeImageView = "3.1.0"
+        const val DotIndicator = "2.0.0"
     }
 
     object Testing {
