@@ -3,6 +3,7 @@ package com.example.halanchallenge.remote
 import com.example.halanchallenge.data.remote.IRemoteGateway
 import com.example.halanchallenge.domain.entities.login.LoginRequest
 import com.example.halanchallenge.domain.entities.login.LoginResponse
+import com.example.halanchallenge.domain.entities.product.ProductRequest
 import com.example.halanchallenge.domain.entities.product.ProductResponse
 
 class RetrofitRemoteGateway(
@@ -13,8 +14,8 @@ class RetrofitRemoteGateway(
         return gateWay.login(loginRequest)
     }
 
-    override suspend fun getProducts(): ProductResponse {
-        return gateWay.getProductsList()
+    override suspend fun getProducts(productRequest: ProductRequest): ProductResponse {
+        return gateWay.getProductsList(productRequest.token)
     }
 
 }

@@ -19,7 +19,7 @@ object NetworkLibraries {
     val Retrofit = arrayListOf(
         "com.squareup.retrofit2:retrofit:${Versions.NetworkLibraries.RetrofitVersion}",
         "com.squareup.retrofit2:converter-gson:${Versions.NetworkLibraries.GsonConverter}",
-        "com.google.code.gson:gson:${Versions.NetworkLibraries.Gson}" ,
+        "com.google.code.gson:gson:${Versions.NetworkLibraries.Gson}",
         "com.squareup.okhttp3:okhttp:${Versions.NetworkLibraries.OkHttpVersion}",
         "com.squareup.okhttp3:logging-interceptor:${Versions.NetworkLibraries.OkHttpVersion}",
     )
@@ -47,7 +47,7 @@ object MaterialDesignLibraries {
     )
 
     val CustomViews = arrayListOf(
-        "de.hdodenhof:circleimageview:${Versions.MaterialDesign.CirculeImageView}" ,
+        "de.hdodenhof:circleimageview:${Versions.MaterialDesign.CirculeImageView}",
         "com.github.martinstamenkovski:ARIndicatorView:${Versions.MaterialDesign.DotIndicator}"
     )
 
@@ -88,7 +88,7 @@ object TestingLibraries {
 }
 
 object UITestingLibraries {
-   val Espresso = arrayListOf(
+    val Espresso = arrayListOf(
         "androidx.test.espresso:espresso-core:${Versions.UITesting.EspressoVersion}"
     )
     const val FragmentTest =
@@ -119,6 +119,15 @@ object Jetpack {
         "androidx.fragment:fragment:${Versions.Jetpack.FragmentKtxVersion}",
         "androidx.fragment:fragment-ktx:${Versions.Jetpack.FragmentKtxVersion}",
         "androidx.activity:activity-ktx:${Versions.Jetpack.ActivityKtxVersion}",
+    )
+
+}
+
+object DI {
+
+    val Koin = arrayListOf(
+        "io.insert-koin:koin-core:${Versions.DI.KoinVersion}",
+        "io.insert-koin:koin-android:${Versions.DI.KoinVersion}"
     )
 
 }

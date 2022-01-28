@@ -1,6 +1,5 @@
 package com.example.halanchallenge.utils
 
-import android.text.TextUtils
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.findViewTreeLifecycleOwner
@@ -13,15 +12,10 @@ fun TextInputLayout.errorUserName(dataLiveData: LiveData<String>) {
 
     findViewTreeLifecycleOwner()?.let {
         dataLiveData.observe(it) {
-            if (TextUtils.isEmpty(it)) {
-                error = null
+            error = if (InputValidator.isUsernameValid(it)) {
+                null
             } else {
-                if (it.length >= 4
-                ) {
-                    error = null
-                } else {
-                    error = resources.getString(R.string.wrong_username_label)
-                }
+                resources.getString(R.string.wrong_username_label)
             }
         }
     }
@@ -32,16 +26,10 @@ fun TextInputLayout.errorUserName(dataLiveData: LiveData<String>) {
 fun TextInputLayout.errorPassword(dataLiveData: LiveData<String>) {
     findViewTreeLifecycleOwner()?.let {
         dataLiveData.observe(it) {
-            if (TextUtils.isEmpty(it)) {
-                error = null
+            error = if (InputValidator.isPasswordValid(it)) {
+                null
             } else {
-                if (InputValidator.isPasswordValid(it)
-                ) {
-                    error = null
-                } else {
-                    error =
-                        resources.getString(R.string.wrong_password_label)
-                }
+                resources.getString(R.string.wrong_password_label)
             }
         }
     }

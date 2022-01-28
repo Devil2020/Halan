@@ -71,4 +71,8 @@ object Versions {
         const val WorkManagerVersion = "2.7.0"
     }
 
+    object DI {
+        const val KoinVersion= "3.1.5"
+    }
+
 }

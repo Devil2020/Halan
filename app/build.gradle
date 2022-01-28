@@ -76,16 +76,13 @@ dependencies {
     implementation Coroutine.Libraries
     implementation NetworkLibraries.Retrofit
     implementation Jetpack.LifeCycle
-
-
+    implementation DI.Koin
     // For Local Test
     testImplementation TestingLibraries.Junit
     testImplementation TestingLibraries.Truth
     testImplementation TestingLibraries.JunitExtensions
     testImplementation TestingLibraries.Core
-
     // For Instrumented Test
-
     androidTestImplementation TestingLibraries.Core
     androidTestImplementation UITestingLibraries.Espresso
     androidTestImplementation UITestingLibraries.AndroidXRuleTest

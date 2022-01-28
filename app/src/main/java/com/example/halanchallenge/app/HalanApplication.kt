@@ -6,7 +6,11 @@ class HalanApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        initKoin()
+    }
 
+    private fun initKoin() {
+        HalanDependencyInjector.inject(this)
     }
 
 }

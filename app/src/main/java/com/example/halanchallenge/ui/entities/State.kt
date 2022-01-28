@@ -9,7 +9,8 @@ sealed class State {
     object Empty : State ()
 
     data class Error (
-        val exceptionType: ExceptionType
+        val exceptionType: ExceptionType ,
+        val message : String
     ) : State()
 
 }
