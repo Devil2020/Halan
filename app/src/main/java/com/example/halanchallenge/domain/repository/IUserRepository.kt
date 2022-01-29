@@ -7,4 +7,18 @@ interface IUserRepository {
 
     suspend fun loginUser(loginRequest: LoginRequest): LoginResponse
 
+    fun isLoggedIn(): Boolean
+
+    fun changeLoggingStatus(isLoggedIn: Boolean)
+
+    fun saveToken(token: String)
+
+    fun loadToken(): String
+
+    fun saveProfile(profile: LoginResponse.Profile)
+
+    fun getProfile(): LoginResponse.Profile
+
+    fun logOutUser()
+
 }

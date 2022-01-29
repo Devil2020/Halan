@@ -7,15 +7,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.halanchallenge.BuildConfig
 import com.example.halanchallenge.R
-import com.example.halanchallenge.utils.extensions.*
 import com.example.halanchallenge.app.HalanCoordinator
 import com.example.halanchallenge.app.HalanDirections
 import com.example.halanchallenge.databinding.ActivitySplashBinding
+import com.example.halanchallenge.utils.extensions.animateView
+import com.example.halanchallenge.utils.extensions.run
+import com.example.halanchallenge.utils.extensions.setInterpolator
+import com.example.halanchallenge.utils.extensions.setUpListener
 import com.mohammedmorse.utils.extensions.navigateDelay
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashActivity : AppCompatActivity() {
 
     var binding: ActivitySplashBinding? = null
+    val vm: SplashViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +71,11 @@ class SplashActivity : AppCompatActivity() {
 
     fun navigate() {
         navigateDelay {
-            HalanCoordinator.navigate(HalanDirections.Auth(this))
+            if (vm.isLoggedIn()) {
+                HalanCoordinator.navigate(HalanDirections.ProductsList(this))
+            } else {
+                HalanCoordinator.navigate(HalanDirections.Auth(this))
+            }
         }
     }
 

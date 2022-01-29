@@ -2,15 +2,17 @@ package com.example.halanchallenge.ui.entities
 
 sealed class State {
 
-    object Loading : State ()
+    object Nothing : State()
+
+    object Loading : State()
 
     data class Success<out T>(val data: T) : State()
 
-    object Empty : State ()
+    object Empty : State()
 
-    data class Error (
-        val exceptionType: ExceptionType ,
-        val message : String
+    data class Error(
+        val exceptionType: ExceptionType,
+        val message: String
     ) : State()
 
 }
@@ -24,5 +26,5 @@ sealed class ExceptionType {
     object SocketException : ExceptionType()
     object EOFException : ExceptionType()
     object UserCancellationException : ExceptionType()
-    data class GenericException (val message : String) : ExceptionType()
+    data class GenericException(val message: String) : ExceptionType()
 }

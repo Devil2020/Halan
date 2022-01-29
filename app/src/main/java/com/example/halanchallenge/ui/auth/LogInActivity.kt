@@ -2,9 +2,10 @@ package com.example.halanchallenge.ui.auth
 
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
 import com.example.halanchallenge.BuildConfig
 import com.example.halanchallenge.R
+import com.example.halanchallenge.app.HalanCoordinator
+import com.example.halanchallenge.app.HalanDirections
 import com.example.halanchallenge.databinding.ActivityLogInBinding
 import com.example.halanchallenge.domain.entities.login.LoginResponse
 import com.example.halanchallenge.ui.entities.Intent
@@ -16,7 +17,6 @@ import com.mohammedmorse.utils.extensions.collect
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
 
@@ -36,9 +36,7 @@ class LogInActivity : BaseActivity<ActivityLogInBinding>(), MviView<Intent, Stat
                 englishName = BuildConfig.LEFT
                 viewmodel = vm
                 doOnLoginClick = {
-                    lifecycleScope.launch {
-                        userIntentions.emit(Intent.Login)
-                    }
+                    userIntentions.tryEmit(Intent.Login)
                 }
             }!!
     }
@@ -67,12 +65,16 @@ class LogInActivity : BaseActivity<ActivityLogInBinding>(), MviView<Intent, Stat
             }
             is State.Success<*> -> {
                 loader.hide()
-                val response = (state.data as LoginResponse)
-                showSnackbar(
-                    this,
-                    "The Token is ${response.token} and Profile is ${response.profile?.name} , ${response.profile?.username} , ${response.profile?.email} , ${response.profile?.image} , ${response.profile?.image} "
-                ) {}
-                //HalanCoordinator.navigate(HalanDirections.ProductsList(this))
+                HalanCoordinator.navigate(HalanDirections.ProductsList(this))
+                    .also {
+                        userIntentions.tryEmit(Intent.MakeItLogggedIn(true))
+                    }
+                    .also {
+                        userIntentions.tryEmit(Intent.SaveToken((state.data as LoginResponse).token!!))
+                    }
+                    .also {
+                        userIntentions.tryEmit(Intent.SaveProfile((state.data as LoginResponse).profile!!))
+                    }
             }
             else -> {
                 loader.hide()
