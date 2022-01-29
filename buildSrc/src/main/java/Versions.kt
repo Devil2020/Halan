@@ -1,5 +1,3 @@
-import com.google.gson.Gson
-
 object Versions {
 
     object NetworkLibraries {
@@ -52,23 +50,20 @@ object Versions {
     object Kotlin {
 
         const val CoroutineVersion = "1.5.2"
-        const val KotlinVersion = "1.5.0"
+        const val KotlinVersion = "1.6.0" // here must be same
         const val CoreKtxVersion= "1.8.0-alpha03"
 
     }
 
     object Jetpack {
-        const val Pagination3Version = "3.1.0-alpha03"
-        const val NavigationVersion = "2.3.1"
 
         const val LifeCycleVersion = "2.5.0-alpha01"
+        const val FragmentKtxVersion = "1.5.0-alpha01"
+
+
 
         const val LifeCycleExtensionsVersion = "2.2.0"
-
-        const val FragmentKtxVersion = "1.5.0-alpha01"
         const val ActivityKtxVersion = "1.4.0"
-
-        const val WorkManagerVersion = "2.7.0"
     }
 
     object DI {

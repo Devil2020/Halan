@@ -38,14 +38,13 @@ class LoginViewModel(private val repository: IUserRepository) : ViewModel(),
     val passwordValidator = MutableLiveData<String>()
 
     // For Intentions and States
+    private var intents: Flow<Intent> = MutableSharedFlow()
     private var response: Flow<State> = handleIntentsAndProduceStates()
-    private lateinit var intents: Flow<Intent>
 
     override fun processIntents(listOfIntents: Flow<Intent>) {
         intents.flatMapMerge {
             listOfIntents
         }
-        /* */
     }
 
     private fun handleIntentsAndProduceStates(): Flow<State> {

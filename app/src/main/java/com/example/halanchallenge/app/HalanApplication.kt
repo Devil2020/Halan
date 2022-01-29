@@ -10,7 +10,7 @@ class HalanApplication : Application() {
     }
 
     private fun initKoin() {
-        HalanDependencyInjector.inject(this)
+        HalanDependencyInjector.inject()
     }
 
 }

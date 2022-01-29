@@ -1,28 +1,21 @@
 package com.example.halanchallenge.app
 
-import android.app.Application
 import com.example.halanchallenge.data.remote.IRemoteGateway
 import com.example.halanchallenge.data.repository.ProductRepository
 import com.example.halanchallenge.data.repository.UserRepository
 import com.example.halanchallenge.domain.repository.IProductRepository
 import com.example.halanchallenge.domain.repository.IUserRepository
 import com.example.halanchallenge.remote.RetrofitCore
-import com.example.halanchallenge.remote.RetrofitGateway
 import com.example.halanchallenge.remote.RetrofitRemoteGateway
 import com.example.halanchallenge.ui.auth.LoginViewModel
 import com.example.halanchallenge.ui.products.list.ProductListViewModel
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
-import org.koin.core.logger.Level
 import org.koin.dsl.module
 
 object HalanDependencyInjector {
 
-    fun inject (application :Application) = startKoin {
-            androidLogger(level = Level.DEBUG)
-            androidContext(application)
+    fun inject () = startKoin {
             modules(arrayListOf(PresentationModule , DomainAndDataModule , RemoteModule))
         }
 
@@ -31,7 +24,7 @@ object HalanDependencyInjector {
 
 private val RemoteModule = module {
 
-    single<RetrofitGateway> { RetrofitCore.getGatewayAgent() }
+    single { RetrofitCore.getGatewayAgent() }
 
     single<IRemoteGateway> { RetrofitRemoteGateway(get()) }
 
@@ -39,9 +32,9 @@ private val RemoteModule = module {
 
 private val DomainAndDataModule = module {
 
-    single<IUserRepository> { UserRepository(get()) }
+    factory<IUserRepository> { UserRepository(get()) }
 
-    single<IProductRepository> { ProductRepository(get()) }
+    factory<IProductRepository> { ProductRepository(get()) }
 
 }
 

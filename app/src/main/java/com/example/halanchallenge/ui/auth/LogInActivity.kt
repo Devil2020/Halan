@@ -1,7 +1,6 @@
 package com.example.halanchallenge.ui.auth
 
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.example.halanchallenge.BuildConfig
 import com.example.halanchallenge.R
@@ -16,19 +15,20 @@ import com.expertapps.base.extensions.showSnackbar
 import com.mohammedmorse.utils.extensions.collect
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
 
 class LogInActivity : BaseActivity<ActivityLogInBinding>(), MviView<Intent, State> {
 
     private val userIntentions = MutableSharedFlow<Intent>()
-    private val viewModel: LoginViewModel by viewModels()
+    private val vm: LoginViewModel by viewModel()
 
     override fun bindDataBinnding(): ActivityLogInBinding {
         return DataBindingUtil.setContentView<ActivityLogInBinding>(this, R.layout.activity_log_in)
             ?.apply {
                 arabicName = BuildConfig.RIGHT
                 englishName = BuildConfig.LEFT
-                viewmodel = viewModel
+                viewmodel = vm
                 doOnLoginClick = {
                     userIntentions.tryEmit(Intent.Login)
                 }
@@ -37,17 +37,15 @@ class LogInActivity : BaseActivity<ActivityLogInBinding>(), MviView<Intent, Stat
 
     override fun onStart() {
         super.onStart()
-        viewModel.processIntents(collectOurIntents())
-        collect(viewModel.getStatus(), ::render)
+        vm.processIntents(collectOurIntents())
+        collect(vm.getStatus(), ::render)
     }
 
     override fun render(state: State) {
         when (state) {
-
             is State.Loading -> {
                 loader.show(WeakReference(this))
             }
-
             is State.Error -> {
                 loader.hide()
                 showSnackbar(
@@ -59,12 +57,10 @@ class LogInActivity : BaseActivity<ActivityLogInBinding>(), MviView<Intent, Stat
                     userIntentions.tryEmit(Intent.Login)
                 }
             }
-
             is State.Success<*> -> {
                 loader.hide()
                 HalanCoordinator.navigate(HalanDirections.ProductsList(this))
             }
-
             else -> {
                 loader.hide()
                 showSnackbar(
