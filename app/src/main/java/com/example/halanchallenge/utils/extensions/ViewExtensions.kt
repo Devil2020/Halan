@@ -1,29 +1,74 @@
 package com.example.halanchallenge.utils.extensions
 
-import android.animation.ValueAnimator
-import android.app.Activity
 import android.content.Context
 import android.os.Build
-import android.os.Handler
-import android.os.Looper
-import android.text.Editable
-import android.text.TextUtils
-import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.ViewStub
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.Interpolator
-import android.widget.EditText
-import android.widget.TextView
-import androidx.annotation.LayoutRes
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.halanchallenge.R
+import com.example.halanchallenge.databinding.ActivityProductDetailBinding
+import com.example.halanchallenge.databinding.ActivityProductsBinding
+import com.example.halanchallenge.databinding.ImageViewItemBinding
+import com.example.halanchallenge.databinding.ProductItemBinding
+import com.example.halanchallenge.domain.entities.login.LoginResponse
+import com.example.halanchallenge.domain.entities.product.ProductResponse
+import com.example.halanchallenge.ui.products.detail.ImagesAdapter
+import com.example.halanchallenge.utils.base.Constants
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.google.android.material.tabs.TabLayout
+import de.hdodenhof.circleimageview.CircleImageView
+
+fun Context.isArabic() = getResources().getConfiguration().locale.language.lowercase().equals("ar")
+
+fun AppCompatImageView.loadImage(url: String, cornerRadius: Int) {
+    Glide.with(context).load(url).transform(RoundedCorners(cornerRadius)).into(this)
+}
+
+fun CircleImageView.loadImage(url: String) {
+    Glide.with(context).load(url).into(this)
+}
+
+fun ActivityProductsBinding.bindProfile(profile: LoginResponse.Profile) {
+    val context = root.context
+    WelcomeMessageTextView.text = context.getString(
+        R.string.helloMessage,
+        if (context.isArabic()) profile.name else profile.username
+    )
+    userName.text = profile.username
+    userEmail.text = profile.email
+    userPhone.text = profile.phone
+    userIv.loadImage(profile.image ?: Constants.REPLACMENT_IMAGE_URL)
+}
+
+fun ProductItemBinding.bind(
+    product: ProductResponse.Product,
+    listener: (ProductResponse.Product) -> Unit
+) {
+    productItemTitleTv.text = if (root.context.isArabic()) product.nameAr else product.nameEn
+    productIv.loadImage(
+        url = product.image ?: Constants.REPLACMENT_PRODUCT_IMAGE_URL,
+        cornerRadius = 15
+    )
+    moreBtn.setOnClickListener {
+        listener.invoke(product)
+    }
+}
+
+fun ImageViewItemBinding.renderImage(image: String) {
+    productImageIV.loadImage(image, 10)
+}
+
+fun ActivityProductDetailBinding.bindProduct(product: ProductResponse.Product) {
+    productTitleTv.text = if (root.context.isArabic()) product.nameAr else product.nameEn
+    productDescriptionTv.text = product.dealDescription
+    productPriceTv.text = root.context.getString(R.string.cache_price, product.price.toString())
+    productImagesBanner.adapter = ImagesAdapter(product.images)
+    arIndicator.attachTo(productImagesBanner, true)
+}
 
 fun RecyclerView.animateExtendedFab(extendedFab: ExtendedFloatingActionButton?) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -54,91 +99,14 @@ fun View?.setInterpolator(inter: Interpolator? = null): View? {
 
 fun View?.run() = this?.animation?.startNow()
 
-fun EditText.intOrZero(): Int {
-    val s = text.toString()
-    return if (s.isEmpty()) 0 else s.toInt()
-}
-
-fun TabLayout.setOnChanged(function: (pos: Int) -> Unit) {
-    addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-        override fun onTabReselected(p0: TabLayout.Tab?) {
-
-        }
-
-        override fun onTabUnselected(p0: TabLayout.Tab?) {
-        }
-
-        override fun onTabSelected(p0: TabLayout.Tab) {
-            function.invoke(p0.position)
-        }
-    })
-}
-
-fun EditText.sub(delay: Long? = 300, runnable: Runnable) {
-    addTextChangedListener(MyWatcher(runnable, delay))
-}
-
-class MyWatcher(private val runnable: Runnable, private val delay: Long? = 300) : TextWatcher {
-    private val handlerThread = Handler(Looper.getMainLooper())
-    override fun afterTextChanged(s: Editable?) {
-        handlerThread.removeCallbacks(runnable)
-        handlerThread.postDelayed(runnable, delay ?: 10)
-    }
-
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-    }
-
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-    }
-}
-
-fun String?.isNotShort(min: Int) = this?.length ?: 0 > min
-
-fun android.view.View.showKeyBoard(context: Context) =
-    (context.getSystemService(Activity.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager)
-        .showSoftInput(this, 0)
-
-fun android.view.View.hideKeyBoard(context: Context) =
-    (context.getSystemService(Activity.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager)
-        .hideSoftInputFromWindow(this.windowToken, 0)
-
-
-fun View.manageVisibilty(isVisible: Boolean) {
-    if (isVisible) {
-        showVisibilty()
-    } else {
-        hideVisibilty()
-    }
-}
-
-fun View.hideVisibilty() {
-    if (visibility != View.GONE) {
-        visibility = View.GONE
-    }
-}
-
-fun View.showVisibilty() {
-    if (visibility != View.VISIBLE) {
-        visibility = View.VISIBLE
-    }
-}
-
-fun TextView.setTextNullable(text: String?, layout: ConstraintLayout) {
-    if (TextUtils.isEmpty(text)) {
-        layout.hideVisibilty()
-    } else {
-        layout.showVisibilty()
-        setText(text)
-    }
-}
-
 fun View.isVisible() = this.visibility == View.VISIBLE
 
 fun View.isGone() = this.visibility == View.GONE
 
 fun View.visible() {
-    this.visibility = View.VISIBLE
+    if (isGone()) {
+        this.visibility = View.VISIBLE
+    }
 }
 
 fun View.gone() {
@@ -146,35 +114,3 @@ fun View.gone() {
         this.visibility = View.GONE
     }
 }
-
-fun ViewStub.visibleIf(boolean: Boolean) = if (boolean) this.visible() else gone()
-
-fun View.visibleIf(boolean: Boolean) = if (boolean) visible() else gone()
-
-fun View.visibleIf(boolean: Boolean?) = if (boolean == true) visible() else gone()
-
-fun View.enableIf(boolean: Boolean) = if (boolean) enable() else disable()
-
-fun View.visibleOrInvIf(boolean: Boolean) = if (boolean) visible() else invisible()
-
-fun View.invisible() {
-    this.visibility = View.INVISIBLE
-}
-
-fun View.disable() {
-    this.isEnabled = false
-}
-
-fun View.enable() {
-    this.isEnabled = true
-}
-
-fun android.widget.TextView.visibleIf(value: String?) {
-    if (!TextUtils.isEmpty(value)) {
-        this.visible()
-        this.text = value
-    } else this.gone()
-}
-
-fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
-    LayoutInflater.from(context).inflate(layoutRes, this, false)

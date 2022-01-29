@@ -17,4 +17,11 @@ object Constants {
     const val USER_PHONE ="user_phone"
 
     const val USER_IMAGE ="user_image"
+
+    const val REPLACMENT_IMAGE_URL = "https://randomuser.me/api/portraits/men/1.jpg"
+
+    const val REPLACMENT_PRODUCT_IMAGE_URL = "https://randomuser.me/api/portraits/lego/9.jpg"
+
+    const val PRODUCT_DETAIL = "product-detail"
+
 }

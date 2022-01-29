@@ -6,6 +6,8 @@ sealed class Intent {
 
     object Login : Intent()
 
+    object LoadProfile : Intent()
+
     data class MakeItLogggedIn (val isLoggedIn : Boolean) : Intent()
 
     data class SaveToken(val token: String) : Intent()
@@ -13,4 +15,6 @@ sealed class Intent {
     data class SaveProfile(val profile: LoginResponse.Profile) : Intent()
 
     object GetProducts : Intent()
+
+    object Logout : Intent()
 }

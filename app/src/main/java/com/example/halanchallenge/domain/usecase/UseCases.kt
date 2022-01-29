@@ -2,6 +2,8 @@ package com.example.halanchallenge.domain.usecase
 
 import com.example.halanchallenge.domain.entities.login.LoginRequest
 import com.example.halanchallenge.domain.entities.login.LoginResponse
+import com.example.halanchallenge.domain.entities.product.ProductRequest
+import com.example.halanchallenge.domain.repository.IProductRepository
 import com.example.halanchallenge.domain.repository.IUserRepository
 import com.example.halanchallenge.ui.entities.State
 import com.example.halanchallenge.utils.toExceptionType
@@ -26,6 +28,20 @@ fun executeLoginUserUseCase(repository: IUserRepository, request: LoginRequest) 
             emit(State.Error(exception.toExceptionType(), ""))
         }
 
+fun executeGetProductsUseCase(repository: IProductRepository, token: String) =
+    flow<State> {
+        emit(State.Success(repository.loadProductsList(ProductRequest(token))))
+    }
+        .onStart {
+            emit(State.Loading)
+        }
+        .onEmpty {
+            emit(State.Empty)
+        }
+        .catch {
+            val exception = it
+            emit(State.Error(exception.toExceptionType(), it.message ?: it.localizedMessage))
+        }
 
 fun executeSetIsLoggedInUseCase(repository: IUserRepository, isLoggedIn: Boolean) =
     repository.changeLoggingStatus(isLoggedIn)
@@ -38,6 +54,6 @@ fun executeGetProfileUseCase(repository: IUserRepository) = repository.getProfil
 fun executeLogOutUseCase(repository: IUserRepository) = repository.logOutUser()
 
 fun executeSaveUserTokenUseCase(repository: IUserRepository, token: String) =
-    repository.saveToken(token)
+    repository.saveToken("Bearer $token")
 
 fun executeGetUserTokenUseCase(repository: IUserRepository) = repository.loadToken()

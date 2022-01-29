@@ -4,14 +4,17 @@
     <string name="login">تسجيل الدخول</string>
     <string name="user_name">اسم المستخدم</string>
     <string name="password">كلمه السر</string>
-    <string name="my_products">منتجاتي</string>
+    <string name="my_products"> 👈 منتجاتي</string>
+
+    <string name="cache_price"> السعر &#160;&#160;&#160; %1$s جنيهه </string>
+
     <string name="more">المزيد</string>
     <string name="back">رجوع</string>
     <string name="product_details">تفاصيل المنتج</string>
     <string name="description">الوصف</string>
 
 
-    <string name="helloMessage">مرحبًا <b> mzelzoghbi </b>!</string>
+    <string name="helloMessage">%1$s مرحبًا</string>
     <string name="happyReviewMessage"> مرحبًا بك في الصفحة الرئيسية , تقييم سعيد &#9995;  </string>
     <string name="total_counts_of_words">إجمالي عدد الكلمات</string>
     <string name="current_counts_of_words">  %1$s كلمه </string>

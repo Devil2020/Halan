@@ -7,6 +7,12 @@ object Versions {
         const val Gson = "2.8.8"
     }
 
+    object ImageLoader {
+
+        const val GlideVersion = "4.12.0"
+
+    }
+
     object MaterialDesign {
 
         const val AppCompatVersion = "1.4.0"

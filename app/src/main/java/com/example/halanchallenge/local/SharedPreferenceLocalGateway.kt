@@ -37,7 +37,7 @@ class SharedPreferenceLocalGateway(private val sp: SharedPreferencesManager) : I
             email = sp.getString(Constants.USER_EMAIL, ""),
             image = sp.getString(Constants.USER_IMAGE, ""),
             name =  sp.getString(Constants.USER_ARABIC_NAME, ""),
-            phone = sp.getString(Constants.USER_ARABIC_NAME, ""),
+            phone = sp.getString(Constants.USER_PHONE, ""),
             username = sp.getString(Constants.USER_NAME, "")
         )
     }

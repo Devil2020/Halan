@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -73,9 +74,15 @@ dependencies {
     implementation MaterialDesignLibraries.Libraries
     implementation MaterialDesignLibraries.CustomViews
     implementation Coroutine.Libraries
+    // Retrofit
     implementation NetworkLibraries.Retrofit
+    // Jetpack
     implementation Jetpack.LifeCycle
+    // DI
     implementation DI.Koin
+    // Image Loader
+    implementation ImageLoader.Glide
+    annotationProcessor ImageLoader.GlideAnnotateProcessor
     // For Local Test
     testImplementation TestingLibraries.Junit
     testImplementation TestingLibraries.Truth

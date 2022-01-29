@@ -28,7 +28,6 @@ class LoginViewModel(private val repository: IUserRepository) : ViewModel(),
 
     // For Intentions and States
     private var intents = MutableSharedFlow<Intent>()
-
     @FlowPreview
     private val response: Flow<State> by lazy { handleIntentsAndProduceStates() }
 

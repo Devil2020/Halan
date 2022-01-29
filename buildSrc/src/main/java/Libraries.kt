@@ -27,6 +27,11 @@ object NetworkLibraries {
 
 }
 
+object ImageLoader {
+    const val Glide = "com.github.bumptech.glide:glide:${Versions.ImageLoader.GlideVersion}"
+    const val GlideAnnotateProcessor = "com.github.bumptech.glide:compiler:${Versions.ImageLoader.GlideVersion}"
+}
+
 object Coroutine {
 
     val Libraries = arrayListOf(

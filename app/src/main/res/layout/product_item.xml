@@ -12,13 +12,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:maxLines="2"
-
             android:textAppearance="@style/Baloothambi2_bold"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp"
-
+            android:maxLines="4"
+            android:ellipsize="end"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@id/product_iv"
@@ -43,11 +41,12 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/product_iv"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
             app:layout_constraintVertical_bias="0.3"
             app:layout_constraintBottom_toBottomOf="@id/more_btn"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/product_item_title_tv"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 

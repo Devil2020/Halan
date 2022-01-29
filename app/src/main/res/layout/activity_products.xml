@@ -5,6 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.products.list.ProductsActivity">
@@ -150,22 +151,37 @@
             tools:text="01119551454"
             android:layout_marginHorizontal="@dimen/_20sdp" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/products_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/Design_Left_Starter_GuidLine"
+            app:layout_constraintTop_toBottomOf="@id/ThirdCardImageView"
+            android:lines="1"
+            android:ellipsize="end"
+            android:textAppearance="@style/Baloothambi2_bold"
+            android:textColor="@color/black"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:textSize="@dimen/_18ssp"
+            android:text="@string/my_products"
+            app:layout_constraintBottom_toTopOf="@id/ProductsRecyclerView"
+            android:layout_marginHorizontal="@dimen/_10sdp" />
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/WordsRecyclerView"
+            android:id="@+id/ProductsRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/_20sdp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/Design_Right_Starter_GuidLine"
             app:layout_constraintStart_toStartOf="@id/Design_Left_Starter_GuidLine"
-            app:layout_constraintTop_toBottomOf="@id/ThirdCardImageView"
-            app:spanCount="1"
-            tools:itemCount="10"
+            app:layout_constraintTop_toBottomOf="@id/products_tv"
             tools:listitem="@layout/product_item" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/SortingFab"
+            android:id="@+id/LogOutFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_10sdp"
@@ -178,6 +194,7 @@
             android:shadowColor="#573200"
             android:shadowRadius="50"
             android:text="@string/logout"
+            android:onClick="logOut"
             android:textAppearance="@style/Baloothambi2_bold"
             android:textColor="@color/white"
             app:elevation="@dimen/_50sdp"
