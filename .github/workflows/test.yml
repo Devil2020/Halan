@@ -1,0 +1,99 @@
+name: Instabug_Action
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+
+  StartProcess:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      # Runs a set of commands using the runners shell
+      - name: Run Welcome Script 🔥
+        run: |
+          echo 🔥 Welcome on Halan Task Project 🔥
+          echo This Project had made with love  🐱‍👤          
+          
+  
+  UnitTest:
+    needs: [ StartProcess ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - uses: actions/checkout@v2
+
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
+      - name: Run Tests on Domain Layer 🔥
+        run: ./gradlew :test
+        
+      - name: Upload Unit Test HTML For Domain Modules 🐱‍🏍
+        uses: actions/upload-artifact@v2
+        with:
+          name: unit_test
+          path: domainn/build/reports/tests/testDebugUnitTest
+    
+      
+  
+  UITest:
+    needs: [ UnitTest ]
+    runs-on: macos-latest
+    steps:
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - uses: actions/checkout@v2
+
+      - name: 1- Run Espresso Test
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          script: ./gradlew connectedCheck
+
+      - name: 1- Upload Instrumented Test For Application 🐱‍🏍
+        uses: actions/upload-artifact@v2
+        with:
+          name: application_instrumented_test
+          path: app/build/reports/androidTests/connected
+          
+
+
+  EndProcess :
+    needs: [ UITest ]
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+
+      # Runs a set of commands using the runners shell
+      - name: Run Welcome Script 🔥
+        run: |
+          echo 🔥 Finish On Ui Testing 🔥
+          echo This Project had made with love  🐱‍👤
+  
+
+
+
+
+
+  
