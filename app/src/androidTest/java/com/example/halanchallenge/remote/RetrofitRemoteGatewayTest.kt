@@ -15,7 +15,7 @@ class RetrofitRemoteGatewayTest {
 
     @Before
     fun setUp() {
-        remoteGateway = RetrofitRemoteGateway()
+        remoteGateway = RetrofitRemoteGateway(RetrofitCore.getGatewayAgent())
     }
 
     @Test

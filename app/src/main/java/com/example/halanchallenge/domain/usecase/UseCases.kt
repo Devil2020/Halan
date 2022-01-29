@@ -9,13 +9,41 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onEmpty
 import kotlinx.coroutines.flow.onStart
 
+/*                    flow<State> {
+                        val result = executeLoginUserUseCase(
+                            vm.repository, LoginRequest(
+                                username = vm.userNameValidator.value ?: "",
+                                password = vm.passwordValidator.value ?: ""
+                            )
+                        )
+                        emit(State.Success(result))
+                    }
+                        .onStart {
+                            emit(State.Loading)
+                        }
+                        .onEmpty {
+                            emit(State.Empty)
+                        }
+                        .catch {
+                            val exception = it
+                            emit(State.Error(it.toExceptionType(), ""))
+                        }.onEach {
+                            render(it)
+                        }
+                        .launchIn(lifecycleScope)*/
 
 fun executeLoginUserUseCase(repository: IUserRepository, request: LoginRequest) =
     flow<State> {
-        emit(State.Success(repository.loginUser(request)))
+        val result = repository.loginUser(request)
+        emit(State.Success(result))
     }
-        .onStart { emit(State.Loading) }
-        .onEmpty { emit(State.Empty) }
+        .onStart {
+            emit(State.Loading)
+        }
+        .onEmpty {
+            emit(State.Empty)
+        }
         .catch {
-            emit(State.Error(it.toExceptionType() , ""))
+            val exception = it
+            emit(State.Error(exception.toExceptionType(), ""))
         }

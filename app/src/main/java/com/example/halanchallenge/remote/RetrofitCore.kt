@@ -29,6 +29,7 @@ object RetrofitCore {
             connectTimeout(1, TimeUnit.MINUTES)
         }.build())
         .addConverterFactory(GsonConverterFactory.create())
+      /*  .addCallAdapterFactory(CoroutineCallAdapterFactory())*/
         .baseUrl(baseUrl)
         .build()
 

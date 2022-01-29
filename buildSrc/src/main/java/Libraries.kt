@@ -22,6 +22,7 @@ object NetworkLibraries {
         "com.google.code.gson:gson:${Versions.NetworkLibraries.Gson}",
         "com.squareup.okhttp3:okhttp:${Versions.NetworkLibraries.OkHttpVersion}",
         "com.squareup.okhttp3:logging-interceptor:${Versions.NetworkLibraries.OkHttpVersion}",
+        "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
     )
 
 }
