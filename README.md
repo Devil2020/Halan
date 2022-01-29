@@ -2,13 +2,15 @@
 # 🎯Halan Callange Task🎯
 
 ## For Screen and Video as Demo for the Application 🎉
-you will find the video in youtube [View Video 1](https://youtu.be/bHAzG7mWDUw) , [View Video 2](https://www.youtube.com/watch?v=2SLRf2YbnoE) , for picture i will give you some picture 👀 too .
+you will find the video in youtube [View Video 1](https://youtu.be/hO8-jMFO-hg)  , for picture i will give you some picture 👀 too .
 
-[<img align="center" alt="Splash" height="1024" width="512" src="https://i.imgur.com/LqSvIye.jpg">](https://i.imgur.com/LqSvIye.jpg)
+[<img align="center" alt="Splash" height="1024" width="512" src="https://i.imgur.com/fBx7tUn.jpg">](https://i.imgur.com/fBx7tUn.jpg)
 
-[<img align="center" alt="Home" height="1024" width="512" src="https://i.imgur.com/XlBSnjs.jpg">](https://i.imgur.com/XlBSnjs.jpg)
+[<img align="center" alt="Auth" height="1024" width="512" src="https://i.imgur.com/HV6onef.jpg">](https://i.imgur.com/HV6onef.jpg)
 
-[<img align="center" alt="Search" height="1024" width="512" src="https://i.imgur.com/K9GzZAZ.jpg">](https://i.imgur.com/K9GzZAZ.jpg)
+[<img align="center" alt="Products" height="1024" width="512" src="https://i.imgur.com/xSXNyB0.jpg">](https://i.imgur.com/xSXNyB0.jpg)
+
+[<img align="center" alt="ProductDetail" height="1024" width="512" src="https://i.imgur.com/tJjUvLI.jpg">](https://i.imgur.com/tJjUvLI.jpg)
 
 ## If you want Generating Apk or Show Lints or show some Testing Reports , I got your back 🖐🚀
 I used Github Actions for this task particularly , so go to action tabs and run the flow GO TO ACTIONS  [View Actions](https://github.com/Devil2020/Instabug/actions)
