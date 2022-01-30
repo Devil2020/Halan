@@ -40,7 +40,7 @@ class InputValidatorTest {
     @Test
     fun `4 - Check If Input Validator Work as we planned or Not , Give Not Valid UserName With Numbers Inside Then Return False`() {
 
-        val userName = InputValidationData.UserName.ValidUserNameWithNumbers
+        val userName = InputValidationData.UserName.ValidUserName
 
         val result = InputValidator.isUsernameValid(userName)
 
