@@ -88,6 +88,7 @@ dependencies {
     testImplementation TestingLibraries.Truth
     testImplementation TestingLibraries.JunitExtensions
     testImplementation TestingLibraries.Core
+    testImplementation TestingLibraries.MockK
     // For Instrumented Test
     androidTestImplementation TestingLibraries.Core
     androidTestImplementation UITestingLibraries.Espresso

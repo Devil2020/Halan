@@ -29,7 +29,8 @@ object NetworkLibraries {
 
 object ImageLoader {
     const val Glide = "com.github.bumptech.glide:glide:${Versions.ImageLoader.GlideVersion}"
-    const val GlideAnnotateProcessor = "com.github.bumptech.glide:compiler:${Versions.ImageLoader.GlideVersion}"
+    const val GlideAnnotateProcessor =
+        "com.github.bumptech.glide:compiler:${Versions.ImageLoader.GlideVersion}"
 }
 
 object Coroutine {
@@ -71,12 +72,9 @@ object TestingLibraries {
 
     const val ArcCore = "androidx.arch.core:core-testing:${Versions.Testing.TestArcCoreVersion}"
 
-    val Mockito = arrayListOf(
-        // why use it , mockito need to generate classes at runtime , so it done in android using dex bytecode
-        "com.linkedin.dexmaker:dexmaker-mockito:${Versions.Testing.MockitoDexMarkerVersion}",
-        "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.Testing.NhaarmanMockitoVersion}",
-        "org.mockito:mockito-core:${Versions.Testing.MockitoCoreVersion}",
-        "org.mockito:mockito-inline:${Versions.Testing.MockitoCoreVersion}",
+    val MockK = arrayListOf(
+        "io.mockk:mockk:${Versions.Testing.MockKVersion}",
+        "io.mockk:mockk-agent-jvm:${Versions.Testing.MockKVersion}"
     )
 
     const val CoroutineTest =

@@ -28,6 +28,7 @@ object Versions {
 
     object Testing {
 
+        val MockKVersion = "1.12.2"
         const val JunitVersion = "4.13.2"
         const val JunitExtensionVersion = "1.1.2"
         const val TestCoreVersion = "1.4.0"
