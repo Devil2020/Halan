@@ -12,7 +12,7 @@ you will find the video in youtube [View Video 1](https://youtu.be/hO8-jMFO-hg) 
 
 [<img align="center" alt="ProductDetail" height="1024" width="512" src="https://i.imgur.com/tJjUvLI.jpg">](https://i.imgur.com/tJjUvLI.jpg)
 
-## If you want Generating Apk or Show Lints or show some Testing Reports , I got your back 🖐🚀
+## If you want show some Testing Reports , I got your back 🖐🚀
 I used Github Actions for this task particularly , so go to action tabs and run the flow GO TO ACTIONS  [View Actions](https://github.com/Devil2020/Halan/actions/workflows/test.yml)
 ## Let's explore Architecture Components
 
@@ -20,14 +20,11 @@ According to  [Android Documentation](https://developer.android.com/topic/librar
 
 [![](https://i.imgur.com/SJLL86W.png)](https://i.imgur.com/SJLL86W.png)
 
-# []() Presentation Layer Architecture patter is MVP and Clean Architecute 
+# []() Presentation Layer Architecture patter is MVi and Clean Architecute 
 
 ## []()UI Controllers
 
 are activities or fragments. The only job of UI controllers is to know how to display data and pass on UI events, such as the user pressing a button. UI Controllers neither contain the UI data, nor directly manipulate data.
-
-## []()Presenter Class with Interfaces
-These classes represent all of the data needed for the UI to display. You'll learn exactly how these two classes function together in this Project.
 
 ## []()Repository
 This class is the single source of truth for all of our app's data and acts as a clean API for the UI to communicate with . Presenter simply request data usecase then it request it to repository. They do not need to worry about whether the repository should load from the database or network, or how or when to persist the data. The repository manages all of this. As part of this responsibility, the repository is a mediator between the different data sources.
@@ -39,39 +36,9 @@ Manages data from a remote data source, such as the internet.
 
 ## []()Local Database Data Source
 
-Manages data from a local data source, such as Sqlite.
+Manages data from a local data source, such as SharedPreference.
 
-
-## []()Local Cache Data Source [just using data structure ]
-
-Manages data from a cache, such as LruCache.
-
-## []()Okay Now 🖐 , This is my Models :
-[![](https://i.imgur.com/Z87cEEt.png)](https://i.imgur.com/Z87cEEt.png)
-It`s Consists 7 Modules in general 
-```sh
-:App it contain Ui and Presenters
-```
-
-```sh
-:Domain it contains some gateways and main models for the app
-```
-
-```sh
-:Data it manage where getting data 
-```
-
-```sh
-:Remote it contains logic for getting words from Network Online 
-```
-
-```sh
-:Style it contains Fonts , Drawables , Theme , Animation and any thing can be change in the design in general .
-```
-
-```sh
-:Utils it contains some utils for each modules , so each module will depend on it
-```
+## []()Okay Now 🖐 , Happy Watching 🧨🎯
 
 ### []()License:
 Copyright 2021 Mohammed Morse
