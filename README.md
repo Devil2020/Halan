@@ -18,7 +18,7 @@ I used Github Actions for this task particularly , so go to action tabs and run 
 
 According to  [Android Documentation](https://developer.android.com/topic/libraries/architecture), Architecture Components are a set of Android libraries for structuring your app in a way that is robust, testable, and maintainable
 
-[![](https://i.imgur.com/SJLL86W.png)](https://i.imgur.com/SJLL86W.png)
+[![](https://i.imgur.com/yhWLiwN.png)](https://i.imgur.com/yhWLiwN.png)
 
 # []() Presentation Layer Architecture patter is MVi and Clean Architecute 
 
