@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.view.isGone
-import androidx.fragment.app.FragmentManager
 import com.example.halanchallenge.BuildConfig
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.platform.MaterialArcMotion
@@ -85,8 +84,7 @@ fun showSnackbar(
     }
 }
 
-
-fun Activity.showLog(message: String) {
+fun showLog(message: String) {
     if (BuildConfig.DEBUG) {
         Log.i("Mohammed-Morse-Logger", message)
     }
