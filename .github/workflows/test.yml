@@ -79,7 +79,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: application_instrumented_test
-          path: /home/runner/work/Halan/Halan/app/build/reports/androidTests/connected/flavors/sharedTestingResources
+          path: /Users/runner/work/Halan/Halan/app/build/reports/androidTests/connected/flavors/sharedTestingResources
           
 
 
