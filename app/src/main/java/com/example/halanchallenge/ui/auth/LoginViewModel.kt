@@ -14,7 +14,6 @@ import com.example.halanchallenge.ui.entities.Intent
 import com.example.halanchallenge.ui.entities.State
 import com.example.halanchallenge.utils.base.MviViewModel
 import com.example.halanchallenge.utils.validator.InputValidator
-import com.expertapps.base.extensions.showLog
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 
@@ -32,14 +31,12 @@ class LoginViewModel(private val repository: IUserRepository) : ViewModel(),
             x?.let {
                 usernameFlag = !InputValidator.isUsernameValid(it)
                 value = passwordFlag == false && usernameFlag == false
-                showLog("On AddSource Of : UserName Validator")
             }
         }
         addSource(passwordValidator) { x ->
             x?.let {
                 passwordFlag = !InputValidator.isPasswordValid(it)
                 value = passwordFlag == false && usernameFlag == false
-                showLog("On AddSource Of : Password Validator ")
             }
         }
 

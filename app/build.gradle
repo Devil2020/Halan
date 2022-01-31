@@ -89,6 +89,9 @@ dependencies {
     testImplementation TestingLibraries.JunitExtensions
     testImplementation TestingLibraries.Core
     testImplementation TestingLibraries.MockK
+    testImplementation TestingLibraries.ArcCore
+    testImplementation TestingLibraries.CoroutineTest
+
     // For Instrumented Test
     androidTestImplementation TestingLibraries.Core
     androidTestImplementation UITestingLibraries.Espresso
