@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: unit_test
-          path: app\build\reports\tests\testSharedTestingResourcesDebugUnitTest
+          path: /home/runner/work/Halan/Halan/app/build/reports/tests/testSharedTestingResourcesDebugUnitTest
     
       
   
@@ -73,7 +73,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: application_instrumented_test
-          path: app\build\reports\androidTests\connected\flavors\sharedTestingResources
+          path: /home/runner/work/Halan/Halan/app/build/reports/androidTests/connected/flavors/sharedTestingResources
           
 
 
