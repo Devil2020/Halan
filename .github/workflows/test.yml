@@ -63,6 +63,9 @@ jobs:
           java-version: 11
       - uses: actions/checkout@v2
 
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
       - name: 1- Run Espresso Test
         uses: reactivecircus/android-emulator-runner@v2
         with:
