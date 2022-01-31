@@ -43,7 +43,7 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
-      - name: Run Tests on Domain Layer 🔥
+      - name: Run UnitTests For Application 🔥
         run: ./gradlew :test
         
       - name: Upload Unit Test HTML For Domain Modules 🐱‍🏍
