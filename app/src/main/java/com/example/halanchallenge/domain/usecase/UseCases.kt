@@ -5,42 +5,62 @@ import com.example.halanchallenge.domain.entities.login.LoginResponse
 import com.example.halanchallenge.domain.entities.product.ProductRequest
 import com.example.halanchallenge.domain.repository.IProductRepository
 import com.example.halanchallenge.domain.repository.IUserRepository
-import com.example.halanchallenge.ui.entities.State
-import com.example.halanchallenge.utils.toExceptionType
+import com.example.halanchallenge.ui.auth.LoginState
+import com.example.halanchallenge.ui.products.list.ProductsState
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onEmpty
 import kotlinx.coroutines.flow.onStart
 
 
 fun executeLoginUserUseCase(repository: IUserRepository, request: LoginRequest) =
-    flow<State> {
-        emit(State.Success(repository.loginUser(request)))
+    flow {
+        emit(
+            LoginState(
+                isLoading = false,
+                error = null,
+                loginResponse = repository.loginUser(request)
+            )
+        )
     }
         .onStart {
-            emit(State.Loading)
-        }
-        .onEmpty {
-            emit(State.Empty)
+            emit(LoginState(isLoading = true, error = null, loginResponse = null))
         }
         .catch {
             val exception = it
-            emit(State.Error(exception.toExceptionType(), ""))
+            emit(LoginState(isLoading = false, error = exception, loginResponse = null))
         }
 
 fun executeGetProductsUseCase(repository: IProductRepository, token: String) =
-    flow<State> {
-        emit(State.Success(repository.loadProductsList(ProductRequest(token))))
+    flow {
+        emit(
+            ProductsState(
+                isLoading = false,
+                error = null,
+                productsResponse = repository.loadProductsList(ProductRequest(token)),
+                isLogOut = null
+            )
+        )
     }
         .onStart {
-            emit(State.Loading)
-        }
-        .onEmpty {
-            emit(State.Empty)
+            emit(
+                ProductsState(
+                    isLoading = true,
+                    error = null,
+                    productsResponse = null,
+                    isLogOut = null
+                )
+            )
         }
         .catch {
             val exception = it
-            emit(State.Error(exception.toExceptionType(), it.message ?: it.localizedMessage))
+            emit(
+                ProductsState(
+                    isLoading = null,
+                    error = exception,
+                    productsResponse = null,
+                    isLogOut = null
+                )
+            )
         }
 
 fun executeSetIsLoggedInUseCase(repository: IUserRepository, isLoggedIn: Boolean) =

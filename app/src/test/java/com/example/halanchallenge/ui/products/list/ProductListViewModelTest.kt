@@ -6,8 +6,6 @@ import com.example.halanchallenge.TestCoroutineRule
 import com.example.halanchallenge.domain.entities.product.ProductRequest
 import com.example.halanchallenge.domain.repository.IProductRepository
 import com.example.halanchallenge.domain.repository.IUserRepository
-import com.example.halanchallenge.ui.entities.Intent
-import com.example.halanchallenge.ui.entities.State
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -22,7 +20,7 @@ class ProductListViewModelTest {
     var productsViewModel: ProductListViewModel? = null
     private val userRepository: IUserRepository = mockk()
     private val productsRepository: IProductRepository = mockk()
-    private val intentFlow = MutableSharedFlow<Intent>()
+    private val intentFlow = MutableSharedFlow<ProductsIntents>()
 
     @ExperimentalCoroutinesApi
     @get:Rule
@@ -43,9 +41,9 @@ class ProductListViewModelTest {
         testCoroutineRule.launch {
             productsViewModel?.processIntents(intentFlow)
             coEvery { productsRepository.loadProductsList(ProductRequest(ProductsData.Input.ValidToken)) } returns ProductsData.Output.SuccessProducts
-            intentFlow.tryEmit(Intent.GetProducts)
+            intentFlow.tryEmit(ProductsIntents.GetProducts)
             val response = productsViewModel?.getStatus()?.last()
-            Assert.assertTrue(response is State.Success<*>)
+            Assert.assertTrue(response?.productsResponse != null)
         }
 
     }
@@ -58,9 +56,9 @@ class ProductListViewModelTest {
             coEvery { productsRepository.loadProductsList(ProductRequest(ProductsData.Input.ExpiredToken)) } throws Exception(
                 ProductsData.Output.ExpiredAuthorizedUser.message
             )
-            intentFlow.tryEmit(Intent.GetProducts)
+            intentFlow.tryEmit(ProductsIntents.GetProducts)
             val response = productsViewModel?.getStatus()?.last()
-            Assert.assertTrue(response is State.Error)
+            Assert.assertTrue(response?.error != null)
         }
 
     }

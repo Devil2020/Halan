@@ -4,8 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.halanchallenge.LoginData
 import com.example.halanchallenge.TestCoroutineRule
 import com.example.halanchallenge.domain.repository.IUserRepository
-import com.example.halanchallenge.ui.entities.Intent
-import com.example.halanchallenge.ui.entities.State
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -19,7 +17,7 @@ class LoginViewModelTest {
 
     var loginViewModel: LoginViewModel? = null
     private val userRepository: IUserRepository = mockk()
-    private val intentFlow = MutableSharedFlow<Intent>()
+    private val intentFlow = MutableSharedFlow<LoginIntents>()
 
     @ExperimentalCoroutinesApi
     @get:Rule
@@ -40,13 +38,14 @@ class LoginViewModelTest {
         testCoroutineRule.launch {
             loginViewModel?.processIntents(intentFlow)
             coEvery { userRepository.loginUser(LoginData.Input.ValidCriteria) } returns LoginData.Output.SuccessResult
-            intentFlow.tryEmit(Intent.Login)
+            intentFlow.tryEmit(LoginIntents.Login)
             val response = loginViewModel?.getStatus()?.last()
-            Assert.assertTrue(response is State.Success<*>)
+            Assert.assertTrue(response?.loginResponse != null)
         }
 
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @FlowPreview
     @Test
     fun `Test MVI Intents Handling To LogIn User With Not Valid LoginRequest`() {
@@ -55,9 +54,9 @@ class LoginViewModelTest {
             coEvery { userRepository.loginUser(LoginData.Input.NotNameValidCriteria) } throws Exception(
                 LoginData.Output.ErrorUserNameResult.message
             )
-            intentFlow.tryEmit(Intent.Login)
+            intentFlow.tryEmit(LoginIntents.Login)
             val response = loginViewModel?.getStatus()?.last()
-            Assert.assertTrue(response is State.Error)
+            Assert.assertTrue(response?.error != null )
         }
 
     }

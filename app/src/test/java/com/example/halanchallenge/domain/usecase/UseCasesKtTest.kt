@@ -9,7 +9,6 @@ import com.example.halanchallenge.data.repository.UserRepository
 import com.example.halanchallenge.domain.entities.product.ProductRequest
 import com.example.halanchallenge.domain.repository.IProductRepository
 import com.example.halanchallenge.domain.repository.IUserRepository
-import com.example.halanchallenge.ui.entities.State
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.flow.last
@@ -44,7 +43,7 @@ class UseCasesKtTest {
         val response = executeLoginUserUseCase(userRepository!!, LoginData.Input.ValidCriteria)
         runBlocking {
             val last = response.last()
-            Assert.assertTrue(last is State.Success<*>)
+            Assert.assertTrue(last.loginResponse != null )
         }
 
 
@@ -62,7 +61,7 @@ class UseCasesKtTest {
         val response = executeLoginUserUseCase(userRepository!!, LoginData.Input.ValidCriteria)
         runBlocking {
             val last = response.last()
-            Assert.assertTrue(last is State.Error)
+            Assert.assertTrue(last.error != null )
         }
 
     }
@@ -80,7 +79,7 @@ class UseCasesKtTest {
             executeGetProductsUseCase(productsRepository!!, ProductsData.Input.ValidToken)
         runBlocking {
             val last = response.last()
-            Assert.assertTrue(last is State.Success<*>)
+            Assert.assertTrue(last.productsResponse != null )
         }
 
     }
@@ -98,7 +97,7 @@ class UseCasesKtTest {
             executeGetProductsUseCase(productsRepository!!, ProductsData.Input.ValidToken)
         runBlocking {
             val last = response.last()
-            Assert.assertTrue(last is State.Error)
+            Assert.assertTrue(last.error != null )
         }
 
     }

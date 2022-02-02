@@ -10,15 +10,14 @@ import com.example.halanchallenge.domain.usecase.executeLoginUserUseCase
 import com.example.halanchallenge.domain.usecase.executeSaveProfileUseCase
 import com.example.halanchallenge.domain.usecase.executeSaveUserTokenUseCase
 import com.example.halanchallenge.domain.usecase.executeSetIsLoggedInUseCase
-import com.example.halanchallenge.ui.entities.Intent
-import com.example.halanchallenge.ui.entities.State
 import com.example.halanchallenge.utils.base.MviViewModel
 import com.example.halanchallenge.utils.validator.InputValidator
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 
 class LoginViewModel(private val repository: IUserRepository) : ViewModel(),
-    MviViewModel<Intent, State> {
+    MviViewModel<LoginIntents, LoginState> {
 
     // For Ui Validation
     val userNameValidator = MutableLiveData<String>()
@@ -43,12 +42,12 @@ class LoginViewModel(private val repository: IUserRepository) : ViewModel(),
     }
 
     // For Intentions and States
-    private var intents = MutableSharedFlow<Intent>()
+    private var intents = MutableSharedFlow<LoginIntents>()
 
     @FlowPreview
-    private val response: Flow<State> by lazy { handleIntentsAndProduceStates() }
+    private val response: Flow<LoginState> by lazy { handleIntentsAndProduceStates() }
 
-    override fun processIntents(listOfIntents: Flow<Intent>) {
+    override fun processIntents(listOfIntents: Flow<LoginIntents>) {
         listOfIntents
             .onEach {
                 intents.emit(it)
@@ -56,12 +55,13 @@ class LoginViewModel(private val repository: IUserRepository) : ViewModel(),
             .launchIn(viewModelScope)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @FlowPreview
-    private fun handleIntentsAndProduceStates(): Flow<State> {
+    private fun handleIntentsAndProduceStates(): Flow<LoginState> {
         return intents
             .flatMapConcat { intent ->
                 when (intent) {
-                    is Intent.Login -> return@flatMapConcat executeLoginUserUseCase(
+                    is LoginIntents.Login -> return@flatMapConcat executeLoginUserUseCase(
                         repository,
                         LoginRequest(
                             username = userNameValidator.value ?: "",
@@ -69,7 +69,7 @@ class LoginViewModel(private val repository: IUserRepository) : ViewModel(),
                         )
                     )
 
-                    is Intent.SaveToken -> return@flatMapConcat flow {
+                    is LoginIntents.SaveToken -> return@flatMapConcat flow {
                         executeSaveUserTokenUseCase(
                             repository,
                             intent.token
@@ -77,14 +77,14 @@ class LoginViewModel(private val repository: IUserRepository) : ViewModel(),
 
                     }
 
-                    is Intent.SaveProfile -> return@flatMapConcat flow {
+                    is LoginIntents.SaveProfile -> return@flatMapConcat flow {
                         executeSaveProfileUseCase(
                             repository,
                             intent.profile
                         )
                     }
 
-                    is Intent.MakeItLogggedIn -> return@flatMapConcat flow {
+                    is LoginIntents.MakeItLogggedIn -> return@flatMapConcat flow {
                         executeSetIsLoggedInUseCase(
                             repository,
                             intent.isLoggedIn
@@ -96,6 +96,20 @@ class LoginViewModel(private val repository: IUserRepository) : ViewModel(),
                     }
                 }
             }
+            .scan(InitialLoginState){
+                old: LoginState, new: LoginState ->
+                if (new.isLoading == true){
+                    old.copy(true , null , null)
+                }else if (new.error != null){
+                    old.copy(null , error = new.error , null)
+                }else if (new.loginResponse !=null){
+                    old.copy(null , null , new.loginResponse)
+                }
+                else {
+                    new
+                }
+            }
+
     }
 
     @FlowPreview

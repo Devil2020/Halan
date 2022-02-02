@@ -16,13 +16,6 @@
             >
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/Design_Vertical_Starter_GuidLine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.05" />
-
-            <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/Design_Left_Starter_GuidLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,14 +34,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@android:string/unknownName"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
                 android:onClick="back"
                 android:padding="@dimen/_10sdp"
                 android:src="@drawable/ic_baseline_arrow_back_ios_24"
-                app:layout_constraintStart_toStartOf="@id/Design_Left_Starter_GuidLine"
-                app:layout_constraintTop_toBottomOf="@id/Design_Vertical_Starter_GuidLine"
-                tools:ignore="DuplicateSpeakableTextCheck" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="DuplicateSpeakableTextCheck"
+                android:layout_marginTop="@dimen/_30sdp"
+                />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/product_details_title_tv"

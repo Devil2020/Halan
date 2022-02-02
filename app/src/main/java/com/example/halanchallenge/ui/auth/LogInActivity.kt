@@ -7,22 +7,20 @@ import com.example.halanchallenge.R
 import com.example.halanchallenge.app.HalanCoordinator
 import com.example.halanchallenge.app.HalanDirections
 import com.example.halanchallenge.databinding.ActivityLogInBinding
-import com.example.halanchallenge.domain.entities.login.LoginResponse
-import com.example.halanchallenge.ui.entities.Intent
-import com.example.halanchallenge.ui.entities.State
 import com.example.halanchallenge.utils.base.BaseActivity
 import com.example.halanchallenge.utils.base.MviView
 import com.expertapps.base.extensions.showSnackbar
 import com.mohammedmorse.utils.extensions.collect
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
 
-class LogInActivity : BaseActivity<ActivityLogInBinding>(), MviView<Intent, State> {
+class LogInActivity : BaseActivity<ActivityLogInBinding>(), MviView<LoginIntents, LoginState> {
 
-    private val userIntentions = MutableSharedFlow<Intent>(
+    private val userIntentions = MutableSharedFlow<LoginIntents>(
         replay = Int.MAX_VALUE,
         extraBufferCapacity = Int.MAX_VALUE,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
@@ -36,58 +34,44 @@ class LogInActivity : BaseActivity<ActivityLogInBinding>(), MviView<Intent, Stat
                 englishName = BuildConfig.LEFT
                 viewmodel = vm
                 doOnLoginClick = {
-                    userIntentions.tryEmit(Intent.Login)
+                    userIntentions.tryEmit(LoginIntents.Login)
                 }
             }!!
     }
 
+    @OptIn(FlowPreview::class)
     override fun onStart() {
         super.onStart()
         vm.processIntents(collectOurIntents())
         collect(vm.getStatus(), ::render)
     }
 
-    override fun render(state: State) {
-        when (state) {
-            is State.Loading -> {
-                loader.show(WeakReference(this))
+    override fun render(state: LoginState) {
+        if (state.isLoading != null) {
+            loader.show(WeakReference(this))
+        } else if (state.error != null) {
+            loader.hide()
+            showSnackbar(
+                this,
+                "Sorry For This Error , but please check this out ${state.error.message} 🖐❌",
+                Toast.LENGTH_LONG,
+                "Try Again"
+            ) {
+                userIntentions.tryEmit(LoginIntents.Login)
             }
-            is State.Error -> {
-                loader.hide()
-                showSnackbar(
-                    this,
-                    "Sorry For This Error , but please check this out ${state.message} 🖐❌",
-                    Toast.LENGTH_LONG,
-                    "Try Again"
-                ) {
-                    userIntentions.tryEmit(Intent.Login)
+        } else if (state.loginResponse != null) {
+            loader.hide()
+            HalanCoordinator.navigate(HalanDirections.ProductsList(this))
+                .also {
+                    userIntentions.tryEmit(LoginIntents.MakeItLogggedIn(true))
+                    userIntentions.tryEmit(LoginIntents.SaveToken((state.loginResponse).token!!))
+                    userIntentions.tryEmit(LoginIntents.SaveProfile((state.loginResponse).profile!!))
                 }
-            }
-            is State.Success<*> -> {
-                loader.hide()
-                HalanCoordinator.navigate(HalanDirections.ProductsList(this))
-                    .also {
-                        userIntentions.tryEmit(Intent.MakeItLogggedIn(true))
-                    }
-                    .also {
-                        userIntentions.tryEmit(Intent.SaveToken((state.data as LoginResponse).token!!))
-                    }
-                    .also {
-                        userIntentions.tryEmit(Intent.SaveProfile((state.data as LoginResponse).profile!!))
-                    }
-            }
-            else -> {
-                loader.hide()
-                showSnackbar(
-                    this,
-                    "Some Thing Happened That I didn`t handle it 🤐🤷‍♂️",
-                    Toast.LENGTH_LONG
-                ) {}
-            }
         }
+
     }
 
-    override fun collectOurIntents(): Flow<Intent> {
+    override fun collectOurIntents(): Flow<LoginIntents> {
         return userIntentions
     }
 

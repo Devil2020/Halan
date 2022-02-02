@@ -6,9 +6,6 @@ import com.example.halanchallenge.R
 import com.example.halanchallenge.app.HalanCoordinator
 import com.example.halanchallenge.app.HalanDirections
 import com.example.halanchallenge.databinding.ActivityProductsBinding
-import com.example.halanchallenge.domain.entities.product.ProductResponse
-import com.example.halanchallenge.ui.entities.Intent
-import com.example.halanchallenge.ui.entities.State
 import com.example.halanchallenge.utils.base.BaseActivity
 import com.example.halanchallenge.utils.base.MviView
 import com.example.halanchallenge.utils.extensions.animateExtendedFab
@@ -20,9 +17,10 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
 
-class ProductsActivity : BaseActivity<ActivityProductsBinding>(), MviView<Intent, State> {
+class ProductsActivity : BaseActivity<ActivityProductsBinding>(),
+    MviView<ProductsIntents, ProductsState> {
 
-    private val userIntentions = MutableSharedFlow<Intent>(
+    private val userIntentions = MutableSharedFlow<ProductsIntents>(
         replay = Int.MAX_VALUE,
         extraBufferCapacity = Int.MAX_VALUE,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
@@ -55,34 +53,31 @@ class ProductsActivity : BaseActivity<ActivityProductsBinding>(), MviView<Intent
 
     override fun onResume() {
         super.onResume()
-        userIntentions.tryEmit(Intent.GetProducts)
+        userIntentions.tryEmit(ProductsIntents.GetProducts)
     }
 
     fun logOut(view: View) {
-        userIntentions.tryEmit(Intent.Logout)
+        userIntentions.tryEmit(ProductsIntents.Logout)
     }
 
-    override fun render(state: State) {
-        when (state) {
-            is State.Nothing -> {
-                HalanCoordinator.navigate(direction = HalanDirections.Auth(this))
-            }
-            is State.Loading -> {
-                loader.show(WeakReference(this))
-            }
-            is State.Error -> {
-                loader.hide()
-                userIntentions.tryEmit(Intent.Logout)
-                HalanCoordinator.navigate(HalanDirections.Auth(this))
-            }
-            is State.Success<*> -> {
-                loader.hide()
-                adapter.submit((state.data as ProductResponse).products!!)
-            }
+    override fun render(state: ProductsState) {
+
+        if (state.isLoading == true) {
+            loader.show(WeakReference(this))
+        } else if (state.error != null) {
+            loader.hide()
+            userIntentions.tryEmit(ProductsIntents.Logout)
+            HalanCoordinator.navigate(HalanDirections.Auth(this))
+        } else if (state.isLogOut == true) {
+            HalanCoordinator.navigate(direction = HalanDirections.Auth(this))
+        } else if (state.productsResponse != null) {
+            loader.hide()
+            adapter.submit(state.productsResponse.products!!)
         }
+
     }
 
-    override fun collectOurIntents(): Flow<Intent> {
+    override fun collectOurIntents(): Flow<ProductsIntents> {
         return userIntentions
     }
 
