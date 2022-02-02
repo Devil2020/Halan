@@ -30,6 +30,6 @@
     <string name="there_is_no_any_word_found">* لم يتم العثور على أي كلمة.</string>
     <string name="please_delete_the_word_and_search_with_another_word_to_test_the_functionality_of_searching">* يرجى حذف الكلمة والبحث بكلمة أخرى لاختبار وظيفة البحث.</string>
 
-    <string name="wrong_username_label">* - اسم مستخدم غير صالح ، يجب إدخال اسم مستخدم بحد أدنى 4 أحرف له.</string>
-    <string name="wrong_password_label">* - كلمة المرور غير صحيحة ، يجب إدخال كلمة مرور لا تقل عن 8 أحرف لها.</string>
+    <string name="wrong_username_label">* -  اسم مستخدم غير صالح ، يجب إدخال اسم مستخدم بحد أدنى 6 أحرف له و اقصي 15.</string>
+    <string name="wrong_password_label">* - كلمة المرور غير صحيحة ، يجب إدخال كلمة مرور لا تقل عن 1 أحرف لها.</string>
 </resources>
