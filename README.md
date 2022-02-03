@@ -2,7 +2,7 @@
 # 🎯Halan Callange Task🎯
 
 ## For Screen and Video as Demo for the Application 🎉
-you will find the video in youtube [View Video 1](https://youtu.be/yC1y_bIpO4E) [View Video 2](https://youtu.be/hO8-jMFO-hg)  , for picture i will give you some picture 👀 too .
+you will find the video in youtube [View Video 1](https://youtu.be/yC1y_bIpO4E) , [View Video 2](https://youtu.be/hO8-jMFO-hg)  , for picture i will give you some picture 👀 too .
 
 [<img align="center" alt="Splash" height="1024" width="512" src="https://i.imgur.com/fBx7tUn.jpg">](https://i.imgur.com/fBx7tUn.jpg)
 
