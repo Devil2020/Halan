@@ -3,11 +3,11 @@ package com.example.halanchallenge.ui.products.list
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.example.halanchallenge.R
+import com.example.halanchallenge.app.AuthanticationDirection
 import com.example.halanchallenge.app.HalanCoordinator
-import com.example.halanchallenge.app.HalanDirections
+import com.example.halanchallenge.app.ProductDetailDirection
 import com.example.halanchallenge.databinding.ActivityProductsBinding
 import com.example.halanchallenge.utils.base.BaseActivity
-import com.example.halanchallenge.utils.base.MviView
 import com.example.halanchallenge.utils.extensions.animateExtendedFab
 import com.example.halanchallenge.utils.extensions.bindProfile
 import com.mohammedmorse.utils.extensions.collect
@@ -17,8 +17,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
 
-class ProductsActivity : BaseActivity<ActivityProductsBinding>(),
-    MviView<ProductsIntents, ProductsState> {
+class ProductsActivity : BaseActivity<ActivityProductsBinding,ProductsIntents, ProductsState>(){
 
     private val userIntentions = MutableSharedFlow<ProductsIntents>(
         replay = Int.MAX_VALUE,
@@ -40,7 +39,7 @@ class ProductsActivity : BaseActivity<ActivityProductsBinding>(),
             ProductsRecyclerView.adapter = adapter
                 .withAction {
                     HalanCoordinator.navigate(
-                        HalanDirections.ProductDetail(
+                        ProductDetailDirection(
                             this@ProductsActivity,
                             it
                         )
@@ -67,9 +66,9 @@ class ProductsActivity : BaseActivity<ActivityProductsBinding>(),
         } else if (state.error != null) {
             loader.hide()
             userIntentions.tryEmit(ProductsIntents.Logout)
-            HalanCoordinator.navigate(HalanDirections.Auth(this))
+            HalanCoordinator.navigate(AuthanticationDirection(this))
         } else if (state.isLogOut == true) {
-            HalanCoordinator.navigate(direction = HalanDirections.Auth(this))
+            HalanCoordinator.navigate(direction = AuthanticationDirection(this))
         } else if (state.productsResponse != null) {
             loader.hide()
             adapter.submit(state.productsResponse.products!!)

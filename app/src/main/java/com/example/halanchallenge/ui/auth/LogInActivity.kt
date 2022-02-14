@@ -5,10 +5,9 @@ import androidx.databinding.DataBindingUtil
 import com.example.halanchallenge.BuildConfig
 import com.example.halanchallenge.R
 import com.example.halanchallenge.app.HalanCoordinator
-import com.example.halanchallenge.app.HalanDirections
+import com.example.halanchallenge.app.ProductListDirection
 import com.example.halanchallenge.databinding.ActivityLogInBinding
 import com.example.halanchallenge.utils.base.BaseActivity
-import com.example.halanchallenge.utils.base.MviView
 import com.expertapps.base.extensions.showSnackbar
 import com.mohammedmorse.utils.extensions.collect
 import kotlinx.coroutines.FlowPreview
@@ -18,7 +17,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
 
-class LogInActivity : BaseActivity<ActivityLogInBinding>(), MviView<LoginIntents, LoginState> {
+class LogInActivity : BaseActivity<ActivityLogInBinding, LoginIntents, LoginState>() {
 
     private val userIntentions = MutableSharedFlow<LoginIntents>(
         replay = Int.MAX_VALUE,
@@ -61,7 +60,7 @@ class LogInActivity : BaseActivity<ActivityLogInBinding>(), MviView<LoginIntents
             }
         } else if (state.loginResponse != null) {
             loader.hide()
-            HalanCoordinator.navigate(HalanDirections.ProductsList(this))
+            HalanCoordinator.navigate(ProductListDirection(this))
                 .also {
                     userIntentions.tryEmit(LoginIntents.MakeItLogggedIn(true))
                     userIntentions.tryEmit(LoginIntents.SaveToken((state.loginResponse).token!!))

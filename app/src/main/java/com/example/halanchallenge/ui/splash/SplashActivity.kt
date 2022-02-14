@@ -7,8 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.halanchallenge.BuildConfig
 import com.example.halanchallenge.R
+import com.example.halanchallenge.app.AuthanticationDirection
 import com.example.halanchallenge.app.HalanCoordinator
-import com.example.halanchallenge.app.HalanDirections
+import com.example.halanchallenge.app.ProductListDirection
 import com.example.halanchallenge.databinding.ActivitySplashBinding
 import com.example.halanchallenge.utils.extensions.animateView
 import com.example.halanchallenge.utils.extensions.run
@@ -72,9 +73,9 @@ class SplashActivity : AppCompatActivity() {
     fun navigate() {
         navigateDelay {
             if (vm.isLoggedIn()) {
-                HalanCoordinator.navigate(HalanDirections.ProductsList(this))
+                HalanCoordinator.navigate(ProductListDirection(this))
             } else {
-                HalanCoordinator.navigate(HalanDirections.Auth(this))
+                HalanCoordinator.navigate(AuthanticationDirection(this))
             }
         }
     }
