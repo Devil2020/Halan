@@ -77,7 +77,6 @@ class LoginViewModel(private val repository: IUserRepository) :
                     new
                 }
             }
-
     }
 
     override fun toState(intent: Intent) = when (intent) {
@@ -115,6 +114,7 @@ class LoginViewModel(private val repository: IUserRepository) :
         else -> {
             emptyFlow()
         }
+
     }
 
     @FlowPreview
