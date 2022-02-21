@@ -14,7 +14,7 @@ class SharedPreferencesManager constructor(private val sharedPrefsInstance: Shar
     }
 
     fun putString(tag: String, str: String?) {
-        sharedPrefsInstance.edit(true) { putString(tag, str) }
+        sharedPrefsInstance.edit(true) { putString(tag, str)  }
     }
 
     fun getString(tag: String, defStr: String? = null): String? {

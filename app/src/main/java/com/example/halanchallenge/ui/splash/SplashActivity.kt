@@ -1,6 +1,7 @@
 package com.example.halanchallenge.ui.splash
 
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.BounceInterpolator
 import androidx.appcompat.app.AppCompatActivity
@@ -17,16 +18,16 @@ import com.example.halanchallenge.utils.extensions.setInterpolator
 import com.example.halanchallenge.utils.extensions.setUpListener
 import com.mohammedmorse.utils.extensions.navigateDelay
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.lang.ref.PhantomReference
 
 class SplashActivity : AppCompatActivity() {
-
     var binding: ActivitySplashBinding? = null
     val vm: SplashViewModel by viewModel()
+    val list : List<Int> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
-
         binding?.apply {
             arabicName = BuildConfig.RIGHT
             englishName = BuildConfig.LEFT

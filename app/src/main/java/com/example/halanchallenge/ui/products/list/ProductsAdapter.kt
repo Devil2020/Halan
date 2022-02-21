@@ -6,15 +6,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.halanchallenge.databinding.ProductItemBinding
 import com.example.halanchallenge.domain.entities.product.ProductResponse
 import com.example.halanchallenge.utils.extensions.bind
+import kotlinx.coroutines.delay
 
-fun ProductsAdapter.withAction(action: (ProductResponse.Product) -> Unit): ProductsAdapter {
+inline fun ProductsAdapter.withAction(noinline action: (ProductResponse.Product) -> Unit): ProductsAdapter {
     this.listener = action
     return this
 }
 
 class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductViewHolder>() {
 
-    private val data: ArrayList<ProductResponse.Product> = ArrayList()
+    @PublishedApi
+    internal val data: ArrayList<ProductResponse.Product> = ArrayList()
 
     lateinit var listener: (ProductResponse.Product) -> Unit
 
