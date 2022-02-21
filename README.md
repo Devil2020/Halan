@@ -12,6 +12,8 @@ you will find the video in youtube [View Video 1](https://youtu.be/yC1y_bIpO4E) 
 
 [<img align="center" alt="ProductDetail" height="1024" width="512" src="https://i.imgur.com/tJjUvLI.jpg">](https://i.imgur.com/tJjUvLI.jpg)
 
+https://user-images.githubusercontent.com/30175940/154934379-a70e19e7-05cc-465a-8658-2cfce1a88b17.mp4
+
 ## If you want show some Testing Reports , I got your back 🖐🚀
 I used Github Actions for this task particularly , so go to action tabs and run the flow GO TO ACTIONS  [View Actions](https://github.com/Devil2020/Halan/actions/workflows/test.yml)
 ## Let's explore Architecture Components
@@ -38,8 +40,6 @@ Manages data from a remote data source, such as the internet.
 
 Manages data from a local data source, such as SharedPreference.
 
-## []()Okay Now 🖐 , Happy Watching 🧨🎯
-https://user-images.githubusercontent.com/6584143/videoplayback.mp4
 ### []()License:
 Copyright 2021 Mohammed Morse
 
@@ -54,3 +54,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+
+
+
