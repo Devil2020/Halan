@@ -50,6 +50,7 @@ jobs:
           file: app/build/outputs/apk/sharedTestingResources/debug/app-sharedTestingResources-debug.apk
 
   EndProcess:
+    needs: [ BuildApk ]
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
