@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "halan-continous-distripution",
+  "private_key_id": "9941f3d1be7e498ae97034231e658cfaee80b26f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC+VSv6RKdX1DPT\nbOg+UXJYsUCrZsyq8N4r9a0pDiQXdsDg7ok+JzoBXVaCI78w2hCx2wsyEu6VSBQa\nZVVYDiqjT/Ml93xgefj8aCx7p0DBCzu82cBR8paYlVV34LcZuy0ZI+DI2WDTWFys\nmglhfrMfAIVk/3IB/kMHG9ZvCL5Hi6b7G12ETg0i00PLEqrUN6YrrRrfuFvCZLKg\nrXU2plVVgi3n+ygbU2TG1x1TGXDjt/btmGtO/zev4w+GBHF7VTPro0lXSFD5COXQ\nBl6QP+XUOI6CXU76siQx4saOICD9jh1vsx0ToEh0q1AbctDORdHjSk1IvWIw5GCC\n9iOT944DAgMBAAECggEAQoxgKIzJoA1ro4CAQY3Tt8weCvASHrDCVcd8KI8vsl6M\nuPjeVrN7dg+vGCisiEWusakfZH43Gk4N7V7B9NxbLyfcoclDHS54jrRT3VZQ705g\nsDrIoj56RlZsgFI7Yw1Niu0/AqryzmKmYJkpL4QP2AakHXitYaIHyJwEoWUCttuz\nD5UFYj4QY4hZeDXUVUxZxd/gVFavAmJ4ux4i7PCnEmxyhjXIzzTDjZhU81iFocpv\nCN+nPZDVtk4jr7O/84OzwjXtzrE6Zh8fo9WOYqDPUkoiYM1DbrwcVevV1ALJw/0a\n2ciXF6RQQqJDg6raH2/DkGwmon8EfELJ6+4vm+yGVQKBgQD9R9BIpXmz7KBv7yBx\ns94R6/BY2CmD5xDWiEEnXJmQfAulkp93TU2a8zwXW5WtzHGugHURNC8Fn4gpFZWU\nQAPa6ckfB81ZFQG+DrKcqLeUAsUgwuzSzpH6TXm0Hqh+NxugNu3m4cqSHwdh4Var\n235lZSp9FP9qusIFdcONDlw/PwKBgQDAYFW+3DAaNNJc+7L711PxKefYji4VoaFT\nKktKXBLssBZhsYSRktrldNii3Svn7ryAQqeTlQF7sO/eAv+ws/CUIsYd8oSdQoUq\no1V23DrZIcRC9yngJ+hhmGT8Yji+6g3A2j1LghhjO4JEjbSmS00kG4BYEX4hV5CM\nXiST8KCEPQKBgDPAi7d8UEzKSdH1S2zQMsz4p6iPqpPwD8m2F5ICYsJaBkszlW/c\nFMJXduzS4tebUZM1XjZAsmb0vO6gIWskVWVSpay4fGX6W9vIxwgplTEiC8Nw8ND2\nMm+xiu+Z4BXCDtwCvUOS2UBYJLsEPyBofgAb1r2uH65gMKrK8EUPLRwjAoGACZlE\n7f8Cj2wvSuBsL9CwqYnTvaRqfD3SVNn5Y75wW0r18u3ulWzkayqHXKj4ddwdn7Cz\nt9NpfYh4j3VK2MBBssKBbCEbqNUW2+fGbeXTMd5TcpvuhPa4y5XVBBrKhgwbn5HE\nGS5mlRz1BQKlDt8W/EQ7BSnqRzOdTMOtw4vwFmkCgYB/0oZ8Mx+NzqyLRBTIyHLj\nZIgL1LIBzOJhqDvZo3Muynbf3rqjs1nd8h4MQiKPFMvcq4/IJ+Lufg/wdZKlz83V\n5/h81dykqQgF34keGjcu6Xd+cGtdJ+FDahBm5wIrnF9AkT2G0BqPWCN0Zf4jdkj5\nI1AYNYCFmJpVL/F00pskyw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-app-distribution-admi@halan-continous-distripution.iam.gserviceaccount.com",
+  "client_id": "107668014195408489763",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-app-distribution-admi%40halan-continous-distripution.iam.gserviceaccount.com"
+}
