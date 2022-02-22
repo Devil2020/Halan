@@ -137,5 +137,6 @@ object DI {
 }
 
 object Firebase {
-
+    val Pom = "com.google.firebase:firebase-bom:${Versions.Firebase.PomVersion}"
+    val Analtics = "com.google.firebase:firebase-analytics-ktx"
 }

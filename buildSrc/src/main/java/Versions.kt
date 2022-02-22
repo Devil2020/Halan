@@ -78,7 +78,7 @@ object Versions {
     }
 
     object Firebase {
-
+        val PomVersion = "29.1.0"
     }
 
 }

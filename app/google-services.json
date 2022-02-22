@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "386317547195",
+    "project_id": "halan-continous-distripution",
+    "storage_bucket": "halan-continous-distripution.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386317547195:android:f163ee027f87b60b705b9e",
+        "android_client_info": {
+          "package_name": "com.example.halanchallenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386317547195-cdu9u5bnmp3dhvj1ihb84h71hp9aoc37.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ1zfR8WEgQXTbOngkRuF_1w5z635QMws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386317547195-cdu9u5bnmp3dhvj1ihb84h71hp9aoc37.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

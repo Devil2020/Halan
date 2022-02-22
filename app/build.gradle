@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.appdistribution'
 }
 
 android {
@@ -24,12 +26,26 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+            shrinkResources false
+            firebaseAppDistribution {
+                artifactType="APK"
+                releaseNotes ="#1 - 🚀 Hey , this is jus a demo , for uploading final apk when we push o specific branch in version Control 🔥 ."
+                testers="mohammedmorsefcis@gmail.com, mohamed.morse@expertapps.com.sa"
+            }
         }
 
         debug {
             minifyEnabled false
             testCoverageEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+            shrinkResources false
+            firebaseAppDistribution {
+                artifactType="APK"
+                releaseNotes ="#1 - 🚀 Hey , this is jus a demo , for uploading final apk when we push o specific branch in version Control 🔥 ."
+                testers="mohammedmorsefcis@gmail.com, mohamed.morse@expertapps.com.sa"
+            }
         }
 
     }
@@ -47,7 +63,11 @@ android {
             buildConfigField("String", "BASE_URL", ApplicationConfigration.BaseUrl)
             buildConfigField("String", "AUTH_URL", ApplicationConfigration.AuthUrl)
             buildConfigField("String", "PRODUCTS_URL", ApplicationConfigration.ProductsUrl)
-
+            firebaseAppDistribution {
+                artifactType="APK"
+                releaseNotes ="#1 - 🚀 Hey , this is jus a demo , for uploading final apk when we push o specific branch in version Control 🔥 ."
+                testers="mohammedmorsefcis@gmail.com, mohamed.morse@expertapps.com.sa"
+            }
         }
 
     }
@@ -89,6 +109,9 @@ dependencies {
     // Image Loader
     implementation ImageLoader.Glide
     annotationProcessor ImageLoader.GlideAnnotateProcessor
+    // Firebase
+    implementation platform(Firebase.Pom)
+    implementation Firebase.Analtics
     // For Local Test
     testImplementation TestingLibraries.Junit
     testImplementation TestingLibraries.Truth
