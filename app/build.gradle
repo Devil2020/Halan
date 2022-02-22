@@ -54,7 +54,7 @@ android {
 
         sharedTestingResources {
             dimension "core"
-            applicationIdSuffix = ".mock"
+
 
             buildConfigField("String", "LEFT", ApplicationConfigration.EnglishName)
             buildConfigField("String", "RIGHT", ApplicationConfigration.ArabicName)
