@@ -77,4 +77,8 @@ object Versions {
         const val KoinVersion= "3.1.5"
     }
 
+    object Firebase {
+
+    }
+
 }

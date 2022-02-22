@@ -135,3 +135,7 @@ object DI {
     )
 
 }
+
+object Firebase {
+
+}
