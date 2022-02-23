@@ -17,7 +17,7 @@ class HalanApplication : Application() {
 
     private fun handleException() {
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
-            Log.e(HalanApplication::class.simpleName, "The Exception Happend Because ${e.message}")
+            Log.e(HalanApplication::class.simpleName, "The Exception Happend Because ${e.message} ❌🤷‍♂️")
         }
     }
 
