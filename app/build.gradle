@@ -30,7 +30,7 @@ android {
             shrinkResources false
             firebaseAppDistribution {
                 artifactType="APK"
-                releaseNotes ="#1 - 🚀 Hey , this is jus a demo , for uploading final apk when we push o specific branch in version Control 🔥 ."
+                releaseNotesFile ="$rootDir/release_notes.txt"
                 testers="mohammedmorsefcis@gmail.com, mohamed.morse@expertapps.com.sa"
                 serviceCredentialsFile="$rootDir/halan-continous-distripution-9941f3d1be7e.json"
             }
@@ -44,7 +44,7 @@ android {
             shrinkResources false
             firebaseAppDistribution {
                 artifactType="APK"
-                releaseNotes ="#1 - 🚀 Hey , this is jus a demo , for uploading final apk when we push o specific branch in version Control 🔥 ."
+                releaseNotesFile ="$rootDir/release_notes.txt"
                 testers="mohammedmorsefcis@gmail.com, mohamed.morse@expertapps.com.sa"
                 serviceCredentialsFile="$rootDir/halan-continous-distripution-9941f3d1be7e.json"
             }
@@ -67,7 +67,7 @@ android {
             buildConfigField("String", "PRODUCTS_URL", ApplicationConfigration.ProductsUrl)
             firebaseAppDistribution {
                 artifactType="APK"
-                releaseNotes ="#1 - 🚀 Hey , this is jus a demo , for uploading final apk when we push o specific branch in version Control 🔥 ."
+                releaseNotesFile ="$rootDir/release_notes.txt"
                 testers="mohammedmorsefcis@gmail.com, mohamed.morse@expertapps.com.sa"
                 serviceCredentialsFile="$rootDir/halan-continous-distripution-9941f3d1be7e.json"
             }
