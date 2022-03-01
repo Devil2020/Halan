@@ -47,3 +47,44 @@ Go to the [Releases](https://github.com/Devil2020/Halan/actions/workflows/test.y
 - [WhatIf](https://github.com/skydoves/whatif) - checking nullable object and empty collections more fluently.
 - [Timber](https://github.com/JakeWharton/timber) - logging.
 - [Material-Components](https://github.com/material-components/material-components-android) - Material design components like ripple animation, cardView.
+
+## Let's explore Architecture Components
+
+According to  [Android Documentation](https://developer.android.com/topic/libraries/architecture), Architecture Components are a set of Android libraries for structuring your app in a way that is robust, testable, and maintainable
+
+[![](https://i.imgur.com/yhWLiwN.png)](https://i.imgur.com/yhWLiwN.png)
+
+# []() Presentation Layer Architecture patter is MVi and Clean Architecute 
+
+## []()UI Controllers
+
+are activities or fragments. The only job of UI controllers is to know how to display data and pass on UI events, such as the user pressing a button. UI Controllers neither contain the UI data, nor directly manipulate data.
+
+## []()Repository
+This class is the single source of truth for all of our app's data and acts as a clean API for the UI to communicate with . Presenter simply request data usecase then it request it to repository. They do not need to worry about whether the repository should load from the database or network, or how or when to persist the data. The repository manages all of this. As part of this responsibility, the repository is a mediator between the different data sources.
+
+## []()Remote Network Data Source
+
+Manages data from a remote data source, such as the internet.
+
+
+## []()Local Database Data Source
+
+Manages data from a local data source, such as SharedPreference.
+
+### []()License:
+Copyright 2021 Mohammed Morse
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+
