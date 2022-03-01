@@ -19,7 +19,7 @@
 </p>
 </br>
 <p align="center">
-<img src=".images/Screening OnBoarding Picture.png.jpg"/>
+<img src=".images/Screening OnBoarding Picture.png"/>
 </p>
 
 ## Download
