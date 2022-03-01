@@ -54,6 +54,8 @@ Go to the [Releases](https://github.com/Devil2020/Halan/actions/workflows/test.y
 
 According to  [Android Documentation](https://developer.android.com/topic/libraries/architecture), Architecture Components are a set of Android libraries for structuring your app in a way that is robust, testable, and maintainable
 
+## Architecture
+
 [![](.images/Architecture-mvi.png)](.images/Architecture-mvi.png)
 
 # []() Presentation Layer Architecture patter is MVi and Clean Architecute 
