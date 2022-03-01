@@ -1,3 +1,8 @@
+
+<p align="center">
+<img src=".images/Screening OnBoarding Picture.png"/>
+</p>
+
 <h1 align="center">Hallan Challange Task</h1>
 
 <p align="center">
@@ -18,9 +23,6 @@
    you are expected to use the challenge to demonstrate your technical skills using all of your preferred libraries eg. (jetpack components libraries), design            patterns. also, it is expected from you to showcase your understanding/implementation of Clean architecture, SOLID principles, reactive programming, write clean      code be as close as you can to the design attached and write test cases for your work .
 </p>
 </br>
-<p align="center">
-<img src=".images/Screening OnBoarding Picture.png"/>
-</p>
 
 ## Download
 Go to the [Releases](https://github.com/Devil2020/Halan/actions/workflows/test.yml) to download the latest APK.
