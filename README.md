@@ -19,7 +19,7 @@
 </p>
 </br>
 <p align="center">
-<img src="/halan_background.jpg"/>
+<img src=".images/Screening OnBoarding Picture.png.jpg"/>
 </p>
 
 ## Download
