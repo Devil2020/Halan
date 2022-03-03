@@ -7,7 +7,7 @@
 
 <p align="center">
  <img alt="Medium" src="https://github.com/mohamedebrahim96/Namshi-Customer/workflows/Android%20CI/badge.svg"/></a>
-     <img alt="Medium" src="https://wakatime.com/badge/user/25e36a94-826e-4b90-bf37-6d78d9028422/project/95a7afd7-03a0-430d-968a-bb8bdc0646d2.svg"/></a>
+     <a href="https://wakatime.com/badge/user/25e36a94-826e-4b90-bf37-6d78d9028422/project/95a7afd7-03a0-430d-968a-bb8bdc0646d2.svg"/><img alt="API" src="https://wakatime.com/badge/user/25e36a94-826e-4b90-bf37-6d78d9028422/project/95a7afd7-03a0-430d-968a-bb8bdc0646d2.svg"/></a>
      <a href="https://github.com/devil2020?tab=followers"><img alt="API" src="https://img.shields.io/github/stars/devil2020?style=social"/></a>
      <a href="https://github.com/Devil2020/Halan/releases/download/v1.0.0/app-sharedTestingResources-debug.apk"><img alt="API" src="https://img.shields.io/github/v/release/devil2020/halan?color=7885FF&label=Halan%20App&logo=android%22"/></a>
 
