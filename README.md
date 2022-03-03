@@ -1,6 +1,6 @@
 
 <p align="center">
-<img src=".images/Screening OnBoarding Picture.png"/>
+<img src=".images/Halan-Task.png"/>
 </p>
 
 <h1 align="center">Hallan Challange Task</h1>
