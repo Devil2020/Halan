@@ -8,7 +8,7 @@
 <p align="center">
  <img alt="Medium" src="https://github.com/mohamedebrahim96/Namshi-Customer/workflows/Android%20CI/badge.svg"/></a>
      <a href="https://github.com/devil2020?tab=followers"><img alt="API" src="https://img.shields.io/github/stars/devil2020?style=social"/></a>
-     <a href="https://github.com/Devil2020/Halan/actions/workflows/test.yml"><img alt="API" src="https://img.shields.io/github/v/release/devil2020/halan?color=7885FF&label=Halan%20App&logo=android%22"/></a>
+     <a href="https://github.com/Devil2020/Halan/releases"><img alt="API" src="https://img.shields.io/github/v/release/devil2020/halan?color=7885FF&label=Halan%20App&logo=android%22"/></a>
 
 </p>
 
@@ -25,7 +25,7 @@
 </br>
 
 ## Download
-Go to the [Releases](https://github.com/Devil2020/Halan/actions/workflows/test.yml) to download the latest APK.
+Go to the [Releases](https://github.com/Devil2020/Halan/releases) to download the latest APK.
 
 
 <img src=".images/halan.gif" align="right" width="32%"/>
