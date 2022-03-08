@@ -1,6 +1,9 @@
 package com.example.halanchallenge.ui.products.list
 
+import android.content.Context
+import android.telephony.TelephonyManager
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -23,6 +26,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
+import java.util.*
 
 class ProductsActivity : BaseActivity<ActivityProductsBinding>(),
     MviView<ProductsIntents, ProductsState> {
@@ -74,6 +78,10 @@ class ProductsActivity : BaseActivity<ActivityProductsBinding>(),
         }
     }
 
+    fun isTablet () : Boolean {
+        val manager = getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        return manager.phoneType == TelephonyManager.PHONE_TYPE_NONE
+    }
 
     override fun onStart() {
         super.onStart()
