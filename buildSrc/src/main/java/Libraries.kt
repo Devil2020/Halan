@@ -109,6 +109,21 @@ object KotlinLibrary {
     const val Library = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.Kotlin.KotlinVersion}"
 }
 
+object Compose {
+    private const val composeVersion = "1.2.0-beta02"
+    private const val viewModelCompose = "2.4.1"
+    val Libraries = arrayListOf(
+        "androidx.compose.ui:ui:$composeVersion",
+        "androidx.compose.material:material:$composeVersion",
+        "androidx.compose.ui:ui-tooling-preview:$composeVersion",
+        "androidx.activity:activity-compose:1.4.0" ,
+        "androidx.navigation:navigation-compose:2.4.2",
+        "io.coil-kt:coil-compose:2.1.0" ,
+        "androidx.lifecycle:lifecycle-viewmodel-compose:$viewModelCompose" ,
+        "androidx.paging:paging-compose:1.0.0-alpha14"
+    )
+}
+
 object Jetpack {
 
 

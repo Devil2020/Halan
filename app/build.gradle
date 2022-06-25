@@ -62,7 +62,12 @@ android {
     }
 
     buildFeatures {
+        compose = true
         dataBinding = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion composeVersion
     }
 
     packagingOptions {
@@ -77,24 +82,26 @@ dependencies {
 
     implementation KotlinLibrary.Library
     implementation AndroidLibrary.Core
-    implementation MaterialDesignLibraries.Libraries
-    implementation MaterialDesignLibraries.CustomViews
-    implementation Coroutine.Libraries
+    MaterialDesignLibraries.Libraries.forEach { implementation it }
+    MaterialDesignLibraries.CustomViews.forEach { implementation it }
+    Coroutine.Libraries.forEach { implementation it }
     // Retrofit
-    implementation NetworkLibraries.Retrofit
+    NetworkLibraries.Retrofit.forEach { implementation it }
     // Jetpack
-    implementation Jetpack.LifeCycle
+    Jetpack.LifeCycle.forEach { implementation it }
     // DI
-    implementation DI.Koin
+    DI.Koin.forEach { implementation it }
     // Image Loader
     implementation ImageLoader.Glide
     annotationProcessor ImageLoader.GlideAnnotateProcessor
+    // For Compose
+    Compose.Libraries.forEach { implementation(it)}
     // For Local Test
     testImplementation TestingLibraries.Junit
     testImplementation TestingLibraries.Truth
     testImplementation TestingLibraries.JunitExtensions
     testImplementation TestingLibraries.Core
-    testImplementation TestingLibraries.MockK
+    TestingLibraries.MockK.forEach { testImplementation it }
     testImplementation TestingLibraries.ArcCore
     testImplementation TestingLibraries.CoroutineTest
     // For SharedSourceSet Resources That helped us for testing
@@ -102,7 +109,7 @@ dependencies {
     sharedTestingResourcesImplementation TestingLibraries.CoroutineTest
     // For Instrumented Test
     androidTestImplementation TestingLibraries.Core
-    androidTestImplementation UITestingLibraries.Espresso
+    UITestingLibraries.Espresso.forEach { androidTestImplementation it }
     androidTestImplementation UITestingLibraries.AndroidXRuleTest
 
 
