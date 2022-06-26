@@ -6,7 +6,7 @@ object CustomPlugin {
 
     private const val gradleVersion = "4.2.1"
     private const val ktlintVersion = "10.0.0"
-    private const val KotlinVersion = "1.6.0"
+    private const val KotlinVersion = "1.6.21"
 
     const val GradleVersion = "com.android.tools.build:gradle:${gradleVersion}"
     const val GradleKTlint = "org.jlleitschuh.gradle:ktlint-gradle:${ktlintVersion}"

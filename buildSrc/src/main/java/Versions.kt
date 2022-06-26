@@ -57,7 +57,7 @@ object Versions {
     object Kotlin {
 
         const val CoroutineVersion = "1.5.2"
-        const val KotlinVersion = "1.6.0" // here must be same
+        const val KotlinVersion = "1.6.21" // here must be same
         const val CoreKtxVersion= "1.8.0-alpha03"
 
     }
