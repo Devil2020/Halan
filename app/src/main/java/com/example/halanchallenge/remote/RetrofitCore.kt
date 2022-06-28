@@ -15,7 +15,7 @@ object RetrofitCore {
     }, Interceptor { chain ->
         val request = chain.request().newBuilder()
         chain.proceed(request.build())
-    })
+    } )
 
     private fun getCore(baseUrl: String) = Retrofit.Builder()
         .client(OkHttpClient.Builder().apply {
