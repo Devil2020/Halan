@@ -15,7 +15,7 @@ object RetrofitCore {
     }, Interceptor { chain ->
         val request = chain.request().newBuilder()
         chain.proceed(request.build())
-    } )
+    } , MockInterceptor() )
 
     private fun getCore(baseUrl: String) = Retrofit.Builder()
         .client(OkHttpClient.Builder().apply {
@@ -29,7 +29,6 @@ object RetrofitCore {
             connectTimeout(1, TimeUnit.MINUTES)
         }.build())
         .addConverterFactory(GsonConverterFactory.create())
-      /*  .addCallAdapterFactory(CoroutineCallAdapterFactory())*/
         .baseUrl(baseUrl)
         .build()
 
