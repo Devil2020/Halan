@@ -113,20 +113,21 @@ class ProductsActivity : BaseActivity<ActivityProductsBinding>(),
     }
 
     override fun render(state: ProductsState) {
-
         if (state.isLoading == true) {
             loader.show(WeakReference(this))
-        } else if (state.error != null) {
+        }
+        else if (state.error != null) {
             loader.hide()
             userIntentions.tryEmit(ProductsIntents.Logout)
             HalanCoordinator.navigate(HalanDirections.Auth(this))
-        } else if (state.isLogOut == true) {
+        }
+        else if (state.isLogOut == true) {
             HalanCoordinator.navigate(direction = HalanDirections.Auth(this))
-        } else if (state.productsResponse != null) {
+        }
+        else if (state.productsResponse != null) {
             loader.hide()
             adapter.submit(state.productsResponse.products!!)
         }
-
     }
 
     override fun collectOurIntents(): Flow<ProductsIntents> {
