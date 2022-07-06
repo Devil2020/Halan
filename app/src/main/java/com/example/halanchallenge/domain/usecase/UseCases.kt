@@ -3,14 +3,68 @@ package com.example.halanchallenge.domain.usecase
 import com.example.halanchallenge.domain.entities.login.LoginRequest
 import com.example.halanchallenge.domain.entities.login.LoginResponse
 import com.example.halanchallenge.domain.entities.product.ProductRequest
+import com.example.halanchallenge.domain.entities.product.ProductResponse
 import com.example.halanchallenge.domain.repository.IProductRepository
 import com.example.halanchallenge.domain.repository.IUserRepository
 import com.example.halanchallenge.ui.auth.LoginState
 import com.example.halanchallenge.ui.products.list.ProductsState
+import com.example.halanchallenge.utils.usecase.State
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
 
+abstract class IUserGateway : UseCase() {
+    /*We must to make the validation for the login here , if the username valid or not*/
+    abstract fun executeLoginUseCase(request: LoginRequest): Flow<State<LoginResponse>>
+    abstract fun executeSaveTokenUseCase(token: String)
+    abstract fun executeLoadTokenUseCase(token: String)
+    abstract fun executeLogoutUseCase(): Flow<State<Boolean>>
+    abstract fun executeSaveProfileUseCase()
+    abstract fun executeLoadProfileUseCase()
+}
+
+class UserGateway(private val repository: IUserRepository) : IUserGateway() {
+
+    override fun executeLoginUseCase(request: LoginRequest): Flow<State<LoginResponse>> {
+        return executeSuspendUseCase {
+            repository.loginUser(request)
+        }
+    }
+
+    override fun executeSaveTokenUseCase(token: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun executeLoadTokenUseCase(token: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun executeSaveProfileUseCase() {
+        TODO("Not yet implemented")
+    }
+
+    override fun executeLoadProfileUseCase() {
+        TODO("Not yet implemented")
+    }
+
+    override fun executeLogoutUseCase(): Flow<State<Boolean>> {
+        TODO("Not yet implemented")
+    }
+}
+
+/*=====================================================================================================================================================================================
+  =====================================================================================================================================================================================*/
+
+abstract class IProductsGateway : UseCase() {
+    abstract fun executeGetProductsUseCase(token: String): Flow<State<ProductResponse>>
+}
+
+class ProductsGateway : IProductsGateway() {
+    override fun executeGetProductsUseCase(token: String): Flow<State<ProductResponse>> {
+        TODO("Not yet implemented")
+    }
+}
 
 fun executeLoginUserUseCase(repository: IUserRepository, request: LoginRequest) =
     flow {
