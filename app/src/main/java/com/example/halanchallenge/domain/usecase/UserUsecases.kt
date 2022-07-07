@@ -5,11 +5,10 @@ import com.example.halanchallenge.domain.entities.login.LoginResponse
 import com.example.halanchallenge.domain.repository.IUserRepository
 import com.example.halanchallenge.ui.auth.LoginLoadingState
 import com.example.halanchallenge.ui.auth.LoginState
+import com.example.halanchallenge.ui.auth.RequestStatus
 import com.example.halanchallenge.ui.auth.toLoginErrorState
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
+import com.example.halanchallenge.utils.validator.InputValidator
+import kotlinx.coroutines.flow.*
 
 abstract class IUserGateway : UseCase() {
     /*We must to make the validation for the login here , if the username valid or not*/
@@ -26,16 +25,26 @@ abstract class IUserGateway : UseCase() {
 class UserGateway(private val repository: IUserRepository) : IUserGateway() {
 
     override fun executeLoginUseCase(request: LoginRequest): Flow<LoginState> {
-        return executeUseCase { repository.loginUser(request) }
-            .onStart {
-                LoginLoadingState
-            }
-            .map {
-                it.toSuccessState()
-            }
-            .catch {
-                it.toLoginErrorState()
-            }
+        return if (InputValidator.isUsernameValid(request.username) && InputValidator.isPasswordValid(
+                request.password
+            )
+        )
+            executeUseCase { repository.loginUser(request) }
+                .onStart {
+                    if (request.username.isNotEmpty() && request.password.isNotEmpty()) {
+                        LoginLoadingState
+                    } else {
+                        return@onStart
+                    }
+                }
+                .map {
+                    it.toSuccessState()
+                }
+                .catch {
+                    it.toLoginErrorState()
+                }
+        else
+            flowOf(LoginState(requestNotValid = RequestStatus(reason = "The UserName Or Password aren`t Valid , Please write a valid format")))
     }
 
     override fun executeSetIsLoggedInUseCase(isLoggedIn: Boolean) {
