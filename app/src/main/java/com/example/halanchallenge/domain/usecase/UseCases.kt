@@ -18,10 +18,12 @@ abstract class IUserGateway : UseCase() {
     /*We must to make the validation for the login here , if the username valid or not*/
     abstract fun executeLoginUseCase(request: LoginRequest): Flow<State<LoginResponse>>
     abstract fun executeSaveTokenUseCase(token: String)
-    abstract fun executeLoadTokenUseCase(token: String)
-    abstract fun executeLogoutUseCase(): Flow<State<Boolean>>
-    abstract fun executeSaveProfileUseCase()
-    abstract fun executeLoadProfileUseCase()
+    abstract fun executeLoadTokenUseCase(): String
+    abstract fun executeLogoutUseCase()
+    abstract fun executeSaveProfileUseCase(profile: LoginResponse.Profile)
+    abstract fun executeLoadProfileUseCase(): LoginResponse.Profile
+    abstract fun executeGetIsLoggedInUseCase(): Boolean
+    abstract fun executeSetIsLoggedInUseCase(isLoggedIn: Boolean)
 }
 
 class UserGateway(private val repository: IUserRepository) : IUserGateway() {
@@ -32,24 +34,26 @@ class UserGateway(private val repository: IUserRepository) : IUserGateway() {
         }
     }
 
+    override fun executeSetIsLoggedInUseCase(isLoggedIn: Boolean) {
+        repository.changeLoggingStatus(isLoggedIn)
+    }
+
+    override fun executeGetIsLoggedInUseCase() = repository.isLoggedIn()
+
     override fun executeSaveTokenUseCase(token: String) {
-        TODO("Not yet implemented")
+        repository.saveToken("Bearer $token")
     }
 
-    override fun executeLoadTokenUseCase(token: String) {
-        TODO("Not yet implemented")
+    override fun executeLoadTokenUseCase() = repository.loadToken()
+
+    override fun executeSaveProfileUseCase(profile: LoginResponse.Profile) {
+        repository.saveProfile(profile)
     }
 
-    override fun executeSaveProfileUseCase() {
-        TODO("Not yet implemented")
-    }
+    override fun executeLoadProfileUseCase() = repository.getProfile()
 
-    override fun executeLoadProfileUseCase() {
-        TODO("Not yet implemented")
-    }
-
-    override fun executeLogoutUseCase(): Flow<State<Boolean>> {
-        TODO("Not yet implemented")
+    override fun executeLogoutUseCase() {
+        repository.logOutUser()
     }
 }
 
@@ -60,74 +64,10 @@ abstract class IProductsGateway : UseCase() {
     abstract fun executeGetProductsUseCase(token: String): Flow<State<ProductResponse>>
 }
 
-class ProductsGateway : IProductsGateway() {
+class ProductsGateway(private val repository: IProductRepository) : IProductsGateway() {
     override fun executeGetProductsUseCase(token: String): Flow<State<ProductResponse>> {
-        TODO("Not yet implemented")
+        return executeSuspendUseCase {
+            repository.loadProductsList(ProductRequest(token))
+        }
     }
 }
-
-fun executeLoginUserUseCase(repository: IUserRepository, request: LoginRequest) =
-    flow {
-        emit(
-            LoginState(
-                isLoading = false,
-                error = null,
-                loginResponse = repository.loginUser(request)
-            )
-        )
-    }
-        .onStart {
-            emit(LoginState(isLoading = true, error = null, loginResponse = null))
-        }
-        .catch {
-            val exception = it
-            emit(LoginState(isLoading = false, error = exception, loginResponse = null))
-        }
-
-fun executeGetProductsUseCase(repository: IProductRepository, token: String) =
-    flow {
-        emit(
-            ProductsState(
-                isLoading = false,
-                error = null,
-                productsResponse = repository.loadProductsList(ProductRequest(token)),
-                isLogOut = null
-            )
-        )
-    }
-        .onStart {
-            emit(
-                ProductsState(
-                    isLoading = true,
-                    error = null,
-                    productsResponse = null,
-                    isLogOut = null
-                )
-            )
-        }
-        .catch {
-            val exception = it
-            emit(
-                ProductsState(
-                    isLoading = null,
-                    error = exception,
-                    productsResponse = null,
-                    isLogOut = null
-                )
-            )
-        }
-
-fun executeSetIsLoggedInUseCase(repository: IUserRepository, isLoggedIn: Boolean) =
-    repository.changeLoggingStatus(isLoggedIn)
-
-fun executeSaveProfileUseCase(repository: IUserRepository, profile: LoginResponse.Profile) =
-    repository.saveProfile(profile)
-
-fun executeGetProfileUseCase(repository: IUserRepository) = repository.getProfile()
-
-fun executeLogOutUseCase(repository: IUserRepository) = repository.logOutUser()
-
-fun executeSaveUserTokenUseCase(repository: IUserRepository, token: String) =
-    repository.saveToken("Bearer $token")
-
-fun executeGetUserTokenUseCase(repository: IUserRepository) = repository.loadToken()

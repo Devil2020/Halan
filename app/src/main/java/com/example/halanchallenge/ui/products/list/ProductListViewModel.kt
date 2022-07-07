@@ -5,10 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.halanchallenge.domain.entities.login.LoginResponse
 import com.example.halanchallenge.domain.repository.IProductRepository
 import com.example.halanchallenge.domain.repository.IUserRepository
-import com.example.halanchallenge.domain.usecase.executeGetProductsUseCase
-import com.example.halanchallenge.domain.usecase.executeGetProfileUseCase
-import com.example.halanchallenge.domain.usecase.executeGetUserTokenUseCase
-import com.example.halanchallenge.domain.usecase.executeLogOutUseCase
+import com.example.halanchallenge.domain.usecase.*
 import com.example.halanchallenge.ui.auth.InitialLoginState
 import com.example.halanchallenge.ui.auth.LoginState
 import com.example.halanchallenge.utils.base.MviViewModel
@@ -17,16 +14,16 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 
 class ProductListViewModel(
-    private val userRepository: IUserRepository,
-    private val productRepository: IProductRepository
+    private val userGateway: IUserGateway,
+    private val productGateway: IProductsGateway
 ) : ViewModel(), MviViewModel<ProductsIntents, ProductsState> {
 
     private var intents = MutableSharedFlow<ProductsIntents>()
     private val token: String by lazy {
-        executeGetUserTokenUseCase(userRepository)
+        userGateway.executeLoadTokenUseCase()
     }
     val profile: LoginResponse.Profile by lazy {
-        executeGetProfileUseCase(userRepository)
+        userGateway.executeLoadProfileUseCase()
     }
 
     @FlowPreview
@@ -47,15 +44,12 @@ class ProductListViewModel(
         return intents
             .flatMapConcat { intent ->
                 when (intent) {
-                    is ProductsIntents.GetProducts -> return@flatMapConcat executeGetProductsUseCase(
-                        productRepository,
+                    is ProductsIntents.GetProducts -> return@flatMapConcat productGateway.executeGetProductsUseCase(
                         token
                     )
 
                     is ProductsIntents.Logout -> return@flatMapConcat flow {
-                        executeLogOutUseCase(
-                            userRepository
-                        )
+                        userGateway.executeLogoutUseCase()
                         emit(
                             ProductsState(
                                 isLoading = false,
@@ -71,19 +65,16 @@ class ProductListViewModel(
                     }
                 }
             }
-            .scan(InitialProductsState){
-                    old: ProductsState, new: ProductsState ->
-                if (new.isLoading == true){
-                    old.copy(true , null , null , null)
-                }else if (new.error != null){
-                    old.copy(null , error = new.error , null , null)
-                }else if (new.productsResponse !=null){
-                    old.copy(null , null , new.productsResponse  , null)
-                }
-                else if (new.isLogOut !=null){
-                    old.copy(null , null , null  , true)
-                }
-                else {
+            .scan(InitialProductsState) { old: ProductsState, new: ProductsState ->
+                if (new.isLoading == true) {
+                    old.copy(true, null, null, null)
+                } else if (new.error != null) {
+                    old.copy(null, error = new.error, null, null)
+                } else if (new.productsResponse != null) {
+                    old.copy(null, null, new.productsResponse, null)
+                } else if (new.isLogOut != null) {
+                    old.copy(null, null, null, true)
+                } else {
                     new
                 }
 
