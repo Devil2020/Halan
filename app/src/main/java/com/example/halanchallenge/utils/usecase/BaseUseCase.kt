@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.*
 
 abstract class UseCase() {
 
-      fun <SuccessModel> executeFlowUseCase(`do`: () -> Flow<SuccessModel>): Flow<State<SuccessModel>> {
+    fun <SuccessModel> executeFlowUseCase(`do`: () -> Flow<SuccessModel>): Flow<State<SuccessModel>> {
         return `do`.invoke().map {
             State.Success(it) as State<SuccessModel>
         }
@@ -21,7 +21,7 @@ abstract class UseCase() {
             }
     }
 
-     fun <SuccessModel> executeSuspendUseCase( `do`: suspend () -> SuccessModel): Flow<State<SuccessModel>> {
+    fun <SuccessModel> executeSuspendUseCase(`do`: suspend () -> SuccessModel): Flow<State<SuccessModel>> {
         return flow {
             val result = `do`.invoke()
             emit(result)
@@ -39,4 +39,10 @@ abstract class UseCase() {
             }
     }
 
+    fun <SuccessModel> executeUseCase(`do`: suspend () -> SuccessModel): Flow<SuccessModel> {
+        return flow {
+            val result = `do`.invoke()
+            emit(result)
+        }
+    }
 }

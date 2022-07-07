@@ -7,6 +7,10 @@ import com.example.halanchallenge.data.repository.ProductRepository
 import com.example.halanchallenge.data.repository.UserRepository
 import com.example.halanchallenge.domain.repository.IProductRepository
 import com.example.halanchallenge.domain.repository.IUserRepository
+import com.example.halanchallenge.domain.usecase.IProductsGateway
+import com.example.halanchallenge.domain.usecase.IUserGateway
+import com.example.halanchallenge.domain.usecase.ProductsGateway
+import com.example.halanchallenge.domain.usecase.UserGateway
 import com.example.halanchallenge.local.SharedPreferenceLocalGateway
 import com.example.halanchallenge.local.SharedPreferencesManager
 import com.example.halanchallenge.remote.RetrofitCore
@@ -21,52 +25,37 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 object HalanDependencyInjector {
-
     fun inject(applicationContext: Context) = startKoin {
         androidContext(applicationContext)
         modules(arrayListOf(PresentationModule, DomainAndDataModule, LocaleModule, RemoteModule))
     }
-
-
 }
 
 private val RemoteModule = module {
-
     single { RetrofitCore.getGatewayAgent() }
-
     single<IRemoteGateway> { RetrofitRemoteGateway(get()) }
-
 }
 
 private val LocaleModule = module {
-
     single {
         androidContext().getSharedPreferences(
             Constants.SHARED_PREFERENCE_NAME,
             Context.MODE_PRIVATE
         )
     }
-
     single { SharedPreferencesManager(get()) }
-
     single<ILocalGateway> { SharedPreferenceLocalGateway(get()) }
-
 }
 
 private val DomainAndDataModule = module {
-
     factory<IUserRepository> { UserRepository(get(), get()) }
-
     factory<IProductRepository> { ProductRepository(get()) }
-
+    factory<IUserGateway> { UserGateway(get()) }
+    factory<IProductsGateway> { ProductsGateway(get()) }
 }
 
 private val PresentationModule = module {
-
-    viewModel { SplashViewModel (get()) }
-
+    viewModel { SplashViewModel(get()) }
     viewModel { LoginViewModel(get()) }
-
     viewModel { ProductListViewModel(get(), get()) }
-
 }

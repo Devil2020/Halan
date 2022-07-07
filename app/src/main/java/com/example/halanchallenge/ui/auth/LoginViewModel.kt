@@ -6,17 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.halanchallenge.domain.entities.login.LoginRequest
 import com.example.halanchallenge.domain.repository.IUserRepository
-import com.example.halanchallenge.domain.usecase.executeLoginUserUseCase
-import com.example.halanchallenge.domain.usecase.executeSaveProfileUseCase
-import com.example.halanchallenge.domain.usecase.executeSaveUserTokenUseCase
-import com.example.halanchallenge.domain.usecase.executeSetIsLoggedInUseCase
+import com.example.halanchallenge.domain.usecase.*
 import com.example.halanchallenge.utils.base.MviViewModel
 import com.example.halanchallenge.utils.validator.InputValidator
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 
-class LoginViewModel(private val repository: IUserRepository) : ViewModel(),
+class LoginViewModel(private val gateway: IUserGateway) : ViewModel(),
     MviViewModel<LoginIntents, LoginState> {
 
     // For Ui Validation
@@ -61,8 +58,7 @@ class LoginViewModel(private val repository: IUserRepository) : ViewModel(),
         return intents
             .flatMapConcat { intent ->
                 when (intent) {
-                    is LoginIntents.Login -> return@flatMapConcat executeLoginUserUseCase(
-                        repository,
+                    is LoginIntents.Login -> return@flatMapConcat gateway.executeLoginUseCase(
                         LoginRequest(
                             username = userNameValidator.value ?: "",
                             password = passwordValidator.value ?: ""
@@ -70,23 +66,20 @@ class LoginViewModel(private val repository: IUserRepository) : ViewModel(),
                     )
 
                     is LoginIntents.SaveToken -> return@flatMapConcat flow {
-                        executeSaveUserTokenUseCase(
-                            repository,
+                        gateway.executeSaveTokenUseCase(
                             intent.token
                         )
 
                     }
 
                     is LoginIntents.SaveProfile -> return@flatMapConcat flow {
-                        executeSaveProfileUseCase(
-                            repository,
+                        gateway.executeSaveProfileUseCase(
                             intent.profile
                         )
                     }
 
                     is LoginIntents.MakeItLogggedIn -> return@flatMapConcat flow {
-                        executeSetIsLoggedInUseCase(
-                            repository,
+                        gateway.executeSetIsLoggedInUseCase(
                             intent.isLoggedIn
                         )
                     }
@@ -96,16 +89,14 @@ class LoginViewModel(private val repository: IUserRepository) : ViewModel(),
                     }
                 }
             }
-            .scan(InitialLoginState){
-                old: LoginState, new: LoginState ->
-                if (new.isLoading == true){
-                    old.copy(true , null , null)
-                }else if (new.error != null){
-                    old.copy(null , error = new.error , null)
-                }else if (new.loginResponse !=null){
-                    old.copy(null , null , new.loginResponse)
-                }
-                else {
+            .scan(InitialLoginState) { old: LoginState, new: LoginState ->
+                if (new.isLoading == true) {
+                    old.copy(true, null, null)
+                } else if (new.error != null) {
+                    old.copy(null, error = new.error, null)
+                } else if (new.loginResponse != null) {
+                    old.copy(null, null, new.loginResponse)
+                } else {
                     new
                 }
             }
