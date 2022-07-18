@@ -3,12 +3,8 @@ package com.example.halanchallenge.ui.products.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.halanchallenge.domain.entities.login.LoginResponse
-import com.example.halanchallenge.domain.repository.IProductRepository
-import com.example.halanchallenge.domain.repository.IUserRepository
-import com.example.halanchallenge.domain.usecase.*
-import com.example.halanchallenge.ui.auth.InitialLoginState
-import com.example.halanchallenge.ui.auth.LoginState
-import com.example.halanchallenge.utils.base.MviViewModel
+import com.example.halanchallenge.domain.usecase.IProductsGateway
+import com.example.halanchallenge.domain.usecase.IUserGateway
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
@@ -16,7 +12,7 @@ import kotlinx.coroutines.flow.*
 class ProductListViewModel(
     private val userGateway: IUserGateway,
     private val productGateway: IProductsGateway
-) : ViewModel(), MviViewModel<ProductsIntents, ProductsState> {
+) : ViewModel() {
 
     private var intents = MutableSharedFlow<ProductsIntents>()
     private val token: String by lazy {
@@ -29,7 +25,7 @@ class ProductListViewModel(
     @FlowPreview
     private val response: Flow<ProductsState> by lazy { handleIntentsAndProduceStates() }
 
-    override fun processIntents(listOfIntents: Flow<ProductsIntents>) {
+     fun processIntents(listOfIntents: Flow<ProductsIntents>) {
         listOfIntents
             .distinctUntilChanged()
             .onEach {
@@ -82,5 +78,5 @@ class ProductListViewModel(
     }
 
     @FlowPreview
-    override fun getStatus() = response
+     fun getStatus() = response
 }

@@ -5,16 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.halanchallenge.domain.entities.login.LoginRequest
-import com.example.halanchallenge.domain.repository.IUserRepository
-import com.example.halanchallenge.domain.usecase.*
-import com.example.halanchallenge.utils.base.MviViewModel
+import com.example.halanchallenge.domain.usecase.IUserGateway
 import com.example.halanchallenge.utils.validator.InputValidator
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 
-class LoginViewModel(private val gateway: IUserGateway) : ViewModel(),
-    MviViewModel<LoginIntents, LoginState> {
+class LoginViewModel(private val gateway: IUserGateway) : ViewModel() {
 
     // For Ui Validation
     val userNameValidator = MutableLiveData<String>()
@@ -44,7 +41,7 @@ class LoginViewModel(private val gateway: IUserGateway) : ViewModel(),
     @FlowPreview
     private val response: Flow<LoginState> by lazy { handleIntentsAndProduceStates() }
 
-    override fun processIntents(listOfIntents: Flow<LoginIntents>) {
+    fun processIntents(listOfIntents: Flow<LoginIntents>) {
         listOfIntents
             .onEach {
                 intents.emit(it)
@@ -104,5 +101,5 @@ class LoginViewModel(private val gateway: IUserGateway) : ViewModel(),
     }
 
     @FlowPreview
-    override fun getStatus() = response
+    fun getStatus() = response
 }

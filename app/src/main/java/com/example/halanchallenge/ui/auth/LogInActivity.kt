@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
 
-class LogInActivity : BaseActivity<ActivityLogInBinding, LoginIntents, LoginState>() {
+class LogInActivity : BaseActivity<ActivityLogInBinding>() {
 
     private val userIntentions = MutableSharedFlow<LoginIntents>(
         replay = Int.MAX_VALUE,
@@ -45,7 +45,7 @@ class LogInActivity : BaseActivity<ActivityLogInBinding, LoginIntents, LoginStat
         collect(vm.getStatus(), ::render)
     }
 
-    override fun render(state: LoginState) {
+    private fun render(state: LoginState) {
         if (state.isLoading != null) {
             loader.show(WeakReference(this))
         } else if (state.error != null) {
@@ -70,7 +70,7 @@ class LogInActivity : BaseActivity<ActivityLogInBinding, LoginIntents, LoginStat
 
     }
 
-    override fun collectOurIntents(): Flow<LoginIntents> {
+    private fun collectOurIntents(): Flow<LoginIntents> {
         return userIntentions
     }
 

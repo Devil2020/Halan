@@ -11,7 +11,7 @@ import com.example.halanchallenge.utils.extensions.bindProduct
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding, Nothing, Nothing>() {
+class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
 
     val product: ProductResponse.Product by lazy {
         intent.getParcelableExtra(Constants.PRODUCT_DETAIL)!!
@@ -19,14 +19,6 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding, Nothing
 
     override fun bindDataBinnding(): ActivityProductDetailBinding {
         return DataBindingUtil.setContentView(this, R.layout.activity_product_detail)
-    }
-
-    override fun render(state: Nothing) {
-
-    }
-
-    override fun collectOurIntents(): Flow<Nothing> {
-        return flowOf()
     }
 
     override fun onStart() {

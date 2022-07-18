@@ -9,7 +9,7 @@ object InputValidator {
 
     fun isUsernameValid(username: String? = null): Boolean {
         return username?.matches("^[a-zA-Z0-9]*$".toRegex())
-            ?.and((username?.length in (6..15)))
+            ?.and((username.length in (6..15)))
             ?: false
     }
 
