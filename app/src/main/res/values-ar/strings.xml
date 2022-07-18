@@ -4,7 +4,7 @@
     <string name="login">تسجيل الدخول</string>
     <string name="user_name">اسم المستخدم</string>
     <string name="password">كلمه السر</string>
-    <string name="my_products"> 👈 منتجاتي</string>
+    <string name="my_products"> منتجاتي </string>
 
     <string name="cache_price"> السعر &#160;&#160;&#160; %1$s جنيهه </string>
 

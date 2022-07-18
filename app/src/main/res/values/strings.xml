@@ -2,7 +2,7 @@
     <string name="login">Login</string>
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
-    <string name="my_products"> 👉 My Products</string>
+    <string name="my_products"> Products </string>
 
     <string name="cache_price"> Price &#160;&#160;&#160;&#160; %1$s .LE </string>
 
