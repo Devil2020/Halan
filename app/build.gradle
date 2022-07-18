@@ -80,6 +80,8 @@ dependencies {
     implementation MaterialDesignLibraries.Libraries
     implementation MaterialDesignLibraries.CustomViews
     implementation Coroutine.Libraries
+    //Compose
+    implementation Compose.Libraries
     // Retrofit
     implementation NetworkLibraries.Retrofit
     // Jetpack

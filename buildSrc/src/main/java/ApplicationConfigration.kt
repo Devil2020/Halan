@@ -5,7 +5,7 @@ object ApplicationConfigration {
 
     const val ApplicationName = "Halan"
 
-    const val CompileSdkVersion = 31
+    const val CompileSdkVersion = 32
 
     const val BuildToolVersion = "30.0.3"
 
