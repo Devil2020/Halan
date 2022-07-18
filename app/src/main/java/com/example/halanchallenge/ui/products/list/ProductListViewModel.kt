@@ -5,27 +5,25 @@ import androidx.lifecycle.viewModelScope
 import com.example.halanchallenge.domain.entities.login.LoginResponse
 import com.example.halanchallenge.domain.repository.IProductRepository
 import com.example.halanchallenge.domain.repository.IUserRepository
-import com.example.halanchallenge.domain.usecase.executeGetProductsUseCase
-import com.example.halanchallenge.domain.usecase.executeGetProfileUseCase
-import com.example.halanchallenge.domain.usecase.executeGetUserTokenUseCase
-import com.example.halanchallenge.domain.usecase.executeLogOutUseCase
-import com.example.halanchallenge.utils.base.Intent
-import com.example.halanchallenge.utils.base.BaseViewModel
+import com.example.halanchallenge.domain.usecase.*
+import com.example.halanchallenge.ui.auth.InitialLoginState
+import com.example.halanchallenge.ui.auth.LoginState
+import com.example.halanchallenge.utils.base.MviViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 
 class ProductListViewModel(
-    private val userRepository: IUserRepository,
-    private val productRepository: IProductRepository
-) : BaseViewModel<ProductsIntents, ProductsState> (){
+    private val userGateway: IUserGateway,
+    private val productGateway: IProductsGateway
+) : ViewModel(), MviViewModel<ProductsIntents, ProductsState> {
 
-    private val intents = MutableSharedFlow<ProductsIntents>()
+    private var intents = MutableSharedFlow<ProductsIntents>()
     private val token: String by lazy {
-        executeGetUserTokenUseCase(userRepository)
+        userGateway.executeLoadTokenUseCase()
     }
     val profile: LoginResponse.Profile by lazy {
-        executeGetProfileUseCase(userRepository)
+        userGateway.executeLoadProfileUseCase()
     }
 
     @FlowPreview
@@ -44,7 +42,29 @@ class ProductListViewModel(
     @FlowPreview
     private fun handleIntentsAndProduceStates(): Flow<ProductsState> {
         return intents
-            .flatMapMerge(concurrency = DEFAULT_CONCURRENCY, transform = ::toState)
+            .flatMapConcat { intent ->
+                when (intent) {
+                    is ProductsIntents.GetProducts -> return@flatMapConcat productGateway.executeGetProductsUseCase(
+                        token
+                    )
+
+                    is ProductsIntents.Logout -> return@flatMapConcat flow {
+                        userGateway.executeLogoutUseCase()
+                        emit(
+                            ProductsState(
+                                isLoading = false,
+                                error = null,
+                                productsResponse = null,
+                                isLogOut = true
+                            )
+                        )
+                    }
+
+                    else -> {
+                        return@flatMapConcat emptyFlow()
+                    }
+                }
+            }
             .scan(InitialProductsState) { old: ProductsState, new: ProductsState ->
                 if (new.isLoading == true) {
                     old.copy(true, null, null, null)
@@ -59,33 +79,6 @@ class ProductListViewModel(
                 }
 
             }
-    }
-
-    override fun toState(intent: Intent): Flow<ProductsState> {
-        return when (intent) {
-            is ProductsIntents.GetProducts -> return executeGetProductsUseCase(
-                productRepository,
-                token
-            )
-
-            is ProductsIntents.Logout -> return flow {
-                executeLogOutUseCase(
-                    userRepository
-                )
-                emit(
-                    ProductsState(
-                        isLoading = false,
-                        error = null,
-                        productsResponse = null,
-                        isLogOut = true
-                    )
-                )
-            }
-
-            else -> {
-                return emptyFlow()
-            }
-        }
     }
 
     @FlowPreview

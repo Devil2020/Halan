@@ -62,12 +62,7 @@ android {
     }
 
     buildFeatures {
-        compose = true
         dataBinding = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion composeVersion
     }
 
     packagingOptions {
@@ -82,26 +77,26 @@ dependencies {
 
     implementation KotlinLibrary.Library
     implementation AndroidLibrary.Core
-    MaterialDesignLibraries.Libraries.forEach { implementation it }
-    MaterialDesignLibraries.CustomViews.forEach { implementation it }
-    Coroutine.Libraries.forEach { implementation it }
+    implementation MaterialDesignLibraries.Libraries
+    implementation MaterialDesignLibraries.CustomViews
+    implementation Coroutine.Libraries
     // Retrofit
-    NetworkLibraries.Retrofit.forEach { implementation it }
+    implementation NetworkLibraries.Retrofit
     // Jetpack
-    Jetpack.LifeCycle.forEach { implementation it }
+    implementation Jetpack.LifeCycle
     // DI
-    DI.Koin.forEach { implementation it }
+    implementation DI.Koin
+    // Window
+    implementation Jetpack.Window
     // Image Loader
     implementation ImageLoader.Glide
     annotationProcessor ImageLoader.GlideAnnotateProcessor
-    // For Compose
-    Compose.Libraries.forEach { implementation(it)}
     // For Local Test
     testImplementation TestingLibraries.Junit
     testImplementation TestingLibraries.Truth
     testImplementation TestingLibraries.JunitExtensions
     testImplementation TestingLibraries.Core
-    TestingLibraries.MockK.forEach { testImplementation it }
+    testImplementation TestingLibraries.MockK
     testImplementation TestingLibraries.ArcCore
     testImplementation TestingLibraries.CoroutineTest
     // For SharedSourceSet Resources That helped us for testing
@@ -109,7 +104,7 @@ dependencies {
     sharedTestingResourcesImplementation TestingLibraries.CoroutineTest
     // For Instrumented Test
     androidTestImplementation TestingLibraries.Core
-    UITestingLibraries.Espresso.forEach { androidTestImplementation it }
+    androidTestImplementation UITestingLibraries.Espresso
     androidTestImplementation UITestingLibraries.AndroidXRuleTest
 
 

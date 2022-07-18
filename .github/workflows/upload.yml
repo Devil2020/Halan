@@ -1,0 +1,63 @@
+# This is a basic workflow to help you get started with Actions
+
+name: UploadApk
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ cd ]
+  pull_request:
+    branches: [ cd ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  StartProcess:
+   # The type of runner that the job will run on
+   runs-on: ubuntu-latest
+   # Steps represent a sequence of tasks that will be executed as part of the job
+   steps:
+     # Runs a set of commands using the runners shell
+     - name: Run Welcome Script 🔥
+       run: |
+         echo 🔥 Welcome on Halan Task Project 🔥
+         echo This Project had made with love  🐱‍👤         
+
+  BuildApk:
+   needs: [ StartProcess ]
+   # The type of runner that the job will run on
+   runs-on: ubuntu-latest
+   # Steps represent a sequence of tasks that will be executed as part of the job
+   steps:
+     - uses: actions/setup-java@v1
+       with:
+         java-version: 11
+     - uses: actions/checkout@v2
+
+     - name: Change wrapper permissions
+       run: chmod +x ./gradlew
+
+     - name: Create Apk 🔥
+       run: ./gradlew assemblesharedTestingResourcesDebug
+     - name: upload artifact to Firebase App Distribution
+       uses: wzieba/Firebase-Distribution-Github-Action@v1
+       with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: testers
+          file: app/build/outputs/apk/sharedTestingResources/debug/app-sharedTestingResources-debug.apk
+
+  EndProcess:
+   # The type of runner that the job will run on
+   runs-on: ubuntu-latest
+   # Steps represent a sequence of tasks that will be executed as part of the job
+   steps:
+     # Runs a set of commands using the runners shell
+     - name: Run End Script 🔥
+       run: |
+         echo 🔥 Bye Bye on Halan Task Project 🔥
+         echo This Project had made with love  🐱‍👤         
+

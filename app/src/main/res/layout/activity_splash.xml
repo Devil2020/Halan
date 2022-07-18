@@ -27,10 +27,10 @@
             android:layout_height="@dimen/_30sdp"
             android:src="@drawable/ic_circule"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="@dimen/_30sdp"
-            app:layout_constraintBottom_toTopOf="@id/arabicApplicationName"
-            android:layout_marginBottom="@dimen/_70sdp"
-            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:alpha="0"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -80,9 +80,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_marginBottom="@dimen/_70sdp"
-            android:progressTint="@color/white"
-            android:progressBackgroundTint="@color/white"
-            android:secondaryProgressTint="@color/white"
+            android:progressTint="@color/accent"
+            android:progressBackgroundTint="@color/accent"
+            android:secondaryProgressTint="@color/accent"
             android:indeterminate="true"
             android:layout_marginHorizontal="@dimen/_50sdp"
             />

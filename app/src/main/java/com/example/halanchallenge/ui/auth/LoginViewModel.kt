@@ -1,28 +1,20 @@
 package com.example.halanchallenge.ui.auth
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.arch.core.util.Function
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.halanchallenge.domain.entities.login.LoginRequest
 import com.example.halanchallenge.domain.repository.IUserRepository
-import com.example.halanchallenge.domain.usecase.executeLoginUserUseCase
-import com.example.halanchallenge.domain.usecase.executeSaveProfileUseCase
-import com.example.halanchallenge.domain.usecase.executeSaveUserTokenUseCase
-import com.example.halanchallenge.domain.usecase.executeSetIsLoggedInUseCase
-import com.example.halanchallenge.utils.base.Intent
-import com.example.halanchallenge.utils.base.BaseViewModel
-import com.example.halanchallenge.utils.base.State
+import com.example.halanchallenge.domain.usecase.*
+import com.example.halanchallenge.utils.base.MviViewModel
 import com.example.halanchallenge.utils.validator.InputValidator
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
-import java.util.function.BiFunction
 
-class LoginViewModel(private val repository: IUserRepository) :
-    BaseViewModel<LoginIntents, LoginState>() {
+class LoginViewModel(private val gateway: IUserGateway) : ViewModel(),
+    MviViewModel<LoginIntents, LoginState> {
 
     // For Ui Validation
     val userNameValidator = MutableLiveData<String>()
@@ -47,7 +39,7 @@ class LoginViewModel(private val repository: IUserRepository) :
     }
 
     // For Intentions and States
-    private val intents = MutableSharedFlow<LoginIntents>()
+    private var intents = MutableSharedFlow<LoginIntents>()
 
     @FlowPreview
     private val response: Flow<LoginState> by lazy { handleIntentsAndProduceStates() }
@@ -63,9 +55,40 @@ class LoginViewModel(private val repository: IUserRepository) :
     @OptIn(ExperimentalCoroutinesApi::class)
     @FlowPreview
     private fun handleIntentsAndProduceStates(): Flow<LoginState> {
-
         return intents
-            .flatMapMerge(concurrency = DEFAULT_CONCURRENCY, transform = ::toState)
+            .flatMapConcat { intent ->
+                when (intent) {
+                    is LoginIntents.Login -> return@flatMapConcat gateway.executeLoginUseCase(
+                        LoginRequest(
+                            username = userNameValidator.value ?: "",
+                            password = passwordValidator.value ?: ""
+                        )
+                    )
+
+                    is LoginIntents.SaveToken -> return@flatMapConcat flow {
+                        gateway.executeSaveTokenUseCase(
+                            intent.token
+                        )
+
+                    }
+
+                    is LoginIntents.SaveProfile -> return@flatMapConcat flow {
+                        gateway.executeSaveProfileUseCase(
+                            intent.profile
+                        )
+                    }
+
+                    is LoginIntents.MakeItLogggedIn -> return@flatMapConcat flow {
+                        gateway.executeSetIsLoggedInUseCase(
+                            intent.isLoggedIn
+                        )
+                    }
+
+                    else -> {
+                        return@flatMapConcat emptyFlow()
+                    }
+                }
+            }
             .scan(InitialLoginState) { old: LoginState, new: LoginState ->
                 if (new.isLoading == true) {
                     old.copy(true, null, null)
@@ -77,43 +100,6 @@ class LoginViewModel(private val repository: IUserRepository) :
                     new
                 }
             }
-    }
-
-    override fun toState(intent: Intent) = when (intent) {
-
-        is LoginIntents.Login -> executeLoginUserUseCase(
-            repository,
-            LoginRequest(
-                username = userNameValidator.value ?: "",
-                password = passwordValidator.value ?: ""
-            )
-        )
-
-        is LoginIntents.SaveToken -> flow {
-            executeSaveUserTokenUseCase(
-                repository,
-                intent.token
-            )
-
-        }
-
-        is LoginIntents.SaveProfile -> flow {
-            executeSaveProfileUseCase(
-                repository,
-                intent.profile
-            )
-        }
-
-        is LoginIntents.MakeItLogggedIn -> flow {
-            executeSetIsLoggedInUseCase(
-                repository,
-                intent.isLoggedIn
-            )
-        }
-
-        else -> {
-            emptyFlow()
-        }
 
     }
 

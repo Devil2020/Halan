@@ -1,14 +1,25 @@
 package com.example.halanchallenge.utils.base
 
+import android.content.ClipData
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import com.expertapps.base.dialog.Loader
-import kotlinx.coroutines.flow.Flow
 
 
-abstract class BaseActivity<B : ViewDataBinding, IntentType : Intent, StateType : State> :
-    AppCompatActivity() {
+abstract class BaseActivity< B : ViewDataBinding > : AppCompatActivity() {
+
+    companion object Toaster {
+
+        fun showMessage ( context: Context , message : String) {
+            Toast.makeText( context , "🎯 The Message is ${message} ." , Toast.LENGTH_SHORT).show()
+            Log.i(BaseActivity::class.java.name , "🎯 The Message is ${message} .")
+        }
+
+    }
 
     val loader: Loader by lazy {
         Loader()
@@ -22,10 +33,6 @@ abstract class BaseActivity<B : ViewDataBinding, IntentType : Intent, StateType 
     }
 
     abstract fun bindDataBinnding(): B
-
-    abstract fun render ( state : StateType )
-
-    abstract fun collectOurIntents () : Flow<IntentType>
 
     override fun onDestroy() {
         super.onDestroy()

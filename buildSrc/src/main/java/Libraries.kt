@@ -140,6 +140,8 @@ object Jetpack {
         "androidx.activity:activity-ktx:${Versions.Jetpack.ActivityKtxVersion}",
     )
 
+    val Window = "androidx.window:window:1.0.0"
+
 }
 
 object DI {
