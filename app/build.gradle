@@ -15,6 +15,9 @@ android {
         versionCode ApplicationConfigration.VersionCode
         versionName ApplicationConfigration.VersionName
         testInstrumentationRunner TestInstrumentedRunner.Runner
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
 
     flavorDimensions "core"
@@ -60,9 +63,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
     buildFeatures {
+        compose true
         dataBinding = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Compose.ComposeVersion
     }
 
     packagingOptions {

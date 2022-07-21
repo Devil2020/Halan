@@ -112,6 +112,7 @@ object KotlinLibrary {
 object Compose {
     private const val composeVersion = "1.3.0-alpha01"
     private const val viewModelCompose = "2.6.0-alpha01"
+    val ComposeVersion = "1.2.0"
     val Libraries = arrayListOf(
         "androidx.compose.ui:ui:$composeVersion",
         "androidx.compose.material:material:$composeVersion",
@@ -120,7 +121,8 @@ object Compose {
         "androidx.navigation:navigation-compose:2.5.0",
         "io.coil-kt:coil-compose:2.1.0" ,
         "androidx.lifecycle:lifecycle-viewmodel-compose:$viewModelCompose" ,
-        "androidx.paging:paging-compose:1.0.0-alpha15"
+        "androidx.paging:paging-compose:1.0.0-alpha15" ,
+        "androidx.constraintlayout:constraintlayout-compose:1.0.1"
     )
 }
 
