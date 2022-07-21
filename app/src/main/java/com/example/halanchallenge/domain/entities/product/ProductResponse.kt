@@ -1,8 +1,6 @@
 package com.example.halanchallenge.domain.entities.product
 
-
 import android.os.Parcelable
-import com.example.halanchallenge.ui.products.list.ProductsState
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -29,8 +27,5 @@ data class ProductResponse(
         val price: Int? // 837
     ) : Parcelable
 
-    fun toSuccessState () : ProductsState {
-        return ProductsState(isLoading = false , productsResponse = this)
-    }
 
 }

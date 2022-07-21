@@ -13,28 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HalanChallenge">
+
         <activity
-            android:name=".ui.products.detail.ProductDetailActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.products.list.ProductsActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.auth.LogInActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.splash.SplashActivity"
-            android:exported="true"
-            android:screenOrientation="portrait" >
+            android:name=".ui.navigator.HalanActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

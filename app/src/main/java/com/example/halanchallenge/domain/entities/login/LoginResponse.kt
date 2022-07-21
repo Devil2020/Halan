@@ -1,7 +1,6 @@
 package com.example.halanchallenge.domain.entities.login
 
 import androidx.annotation.Keep
-import com.example.halanchallenge.ui.auth.LoginState
 
 @Keep
 data class LoginResponse(
@@ -18,6 +17,5 @@ data class LoginResponse(
         val username: String? // mohammedmorse
     )
 
-    fun toSuccessState () = LoginState(isLoading = null , error = null , loginResponse = this)
 
 }

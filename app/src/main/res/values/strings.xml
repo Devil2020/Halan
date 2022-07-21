@@ -11,8 +11,8 @@
     <string name="product_details">Product Details</string>
     <string name="description">Description</string>
 
-    <string name="helloMessage" >Hello %1$s </string>
-    <string name="happyReviewMessage" > Welcome to your products , Happy Browsing &#9995; </string>
+    <string name="helloMessage">Hello %1$s </string>
+    <string name="happyReviewMessage"> Welcome to your products , Happy Browsing &#9995; </string>
     <string name="toasterMessage" translatable="false"> %1$s &#9995; </string>
     <string name="total_counts_of_words">Total Counts Of Words</string>
     <string name="current_counts_of_words"> %1$s Words</string>

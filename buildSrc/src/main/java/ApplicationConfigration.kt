@@ -1,6 +1,5 @@
 object ApplicationConfigration {
 
-
     const val ApplicationId = "com.example.halanchallenge"
 
     const val ApplicationName = "Halan"
