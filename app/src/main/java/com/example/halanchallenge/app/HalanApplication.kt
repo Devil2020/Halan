@@ -2,6 +2,7 @@ package com.example.halanchallenge.app
 
 import android.app.Application
 import android.util.Log
+import com.example.halanchallenge.app.di.HalanDependencyInjector
 
 class HalanApplication : Application() {
 

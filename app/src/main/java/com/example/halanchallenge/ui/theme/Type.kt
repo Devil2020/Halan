@@ -5,10 +5,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.sp
 import com.example.halanchallenge.R
 
-private val MorseCustomFont = FontFamily(
+val MorseCustomFont = FontFamily(
     Font(R.font.morse_regular),
     Font(R.font.morse_medium, FontWeight.W500),
     Font(R.font.morse_semibold, FontWeight.W600),
@@ -18,6 +20,16 @@ private val MorseCustomFont = FontFamily(
 
 val HalanTypography = Typography(
     defaultFontFamily = MorseCustomFont,
+    h1 = TextStyle(
+        fontFamily = MorseCustomFont,
+        fontWeight = FontWeight.Bold,
+        fontSize = 120.sp,
+    ),
+    h2 = TextStyle(
+        fontFamily = MorseCustomFont,
+        fontWeight = FontWeight.Bold,
+        fontSize = 80.sp,
+    ),
     h4 = TextStyle(
         fontWeight = FontWeight.SemiBold,
         fontSize = 30.sp,

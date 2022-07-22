@@ -1,4 +1,4 @@
-package com.example.halanchallenge.app
+package com.example.halanchallenge.app.di
 
 import android.content.Context
 import com.example.halanchallenge.data.local.ILocalGateway
