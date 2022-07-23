@@ -7,9 +7,23 @@ class HalanCoordinator private constructor(private val navHostController: NavHos
 
     private lateinit var lastDirection: Directions
     fun getNavController() = navHostController
-    fun navigate(direction: Directions) {}
-    fun back() {
+    fun navigate(
+        direction: Directions,
+        closeCurrent: Boolean = false,
+        restoringState: Boolean = false,
+        launchingSingleTop: Boolean = false,
+    ) = navHostController.navigate(direction.name) {
+        restoreState = restoringState
+        launchSingleTop = launchingSingleTop
+        if (closeCurrent) {
+            popUpTo(direction.name) {
+                inclusive = true
+            }
+        }
+    }
 
+    fun back() {
+        navHostController.popBackStack()
     }
 
     companion object {

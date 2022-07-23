@@ -19,11 +19,12 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.example.halanchallenge.BuildConfig
+import com.example.halanchallenge.app.coordinator.HalanCoordinator
 import com.example.halanchallenge.ui.theme.*
 
 @OptIn(ExperimentalUnitApi::class)
 @Composable
-fun SplashScreen() {
+fun SplashScreen( coordinator: HalanCoordinator ) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
@@ -88,7 +89,7 @@ fun SplashScreen() {
 }
 
 @Composable
-private fun CircleView(modifier: Modifier, circleColor: Color) {
+fun CircleView(modifier: Modifier, circleColor: Color) {
     Canvas(modifier = modifier) {
         drawCircle(color = circleColor)
     }

@@ -14,19 +14,19 @@ import com.example.halanchallenge.ui.splash.SplashScreen
 fun HalanNavHost(coordinator: HalanCoordinator) {
     NavHost(
         navController = coordinator.getNavController(),
-        startDestination = Directions.SplashDirection.name
+        startDestination = Directions.AuthenticationDirection.name
     ) {
         composable(Directions.SplashDirection.name) {
-            SplashScreen()
+            SplashScreen(coordinator)
         }
         composable(Directions.AuthenticationDirection.name) {
-            LoginScreen()
+            LoginScreen(coordinator)
         }
         composable(Directions.ProductsDirection.name) {
-            ProductListScreen()
+            ProductListScreen(coordinator)
         }
         composable(Directions.ProductDetailsDirection.name) {
-            ProductDetailsScreen()
+            ProductDetailsScreen(coordinator)
         }
     }
 }
