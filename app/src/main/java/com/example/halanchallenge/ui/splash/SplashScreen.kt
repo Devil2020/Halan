@@ -1,31 +1,31 @@
 package com.example.halanchallenge.ui.splash
 
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.ExperimentalUnitApi
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.example.halanchallenge.BuildConfig
+import com.example.halanchallenge.app.coordinator.Directions
 import com.example.halanchallenge.app.coordinator.HalanCoordinator
+import com.example.halanchallenge.ui.base.CircleView
+import com.example.halanchallenge.ui.base.LinearProgressBar
 import com.example.halanchallenge.ui.theme.*
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalUnitApi::class)
 @Composable
 fun SplashScreen(coordinator: HalanCoordinator) {
+    val scope = rememberCoroutineScope()
     val scaleCircleAnimation = rememberInfiniteTransition()
     val circleWidthSize = scaleCircleAnimation.animateFloat(
         initialValue = 0.0F,
@@ -43,6 +43,15 @@ fun SplashScreen(coordinator: HalanCoordinator) {
             repeatMode = RepeatMode.Reverse
         )
     )
+    scope.launch {
+        coordinator.navigateAfter(
+            5000L,
+            direction = Directions.AuthenticationDirection,
+            closeCurrent = true,
+            restoringState = false,
+            launchingSingleTop = true
+        )
+    }
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
@@ -72,7 +81,7 @@ fun SplashScreen(coordinator: HalanCoordinator) {
             style = MaterialTheme.typography.h1,
             modifier = Modifier
                 .constrainAs(arabic) {
-                    end.linkTo(circle.end, margin = (-40).dp, goneMargin = 140.dp)
+                    end.linkTo(circle.absoluteRight, margin = (-130).dp, goneMargin = 140.dp)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom, 130.dp)
                 }
@@ -84,13 +93,13 @@ fun SplashScreen(coordinator: HalanCoordinator) {
             modifier = Modifier
                 .constrainAs(english) {
                     linkTo(
-                        start = circle.start,
-                        startMargin = (-30).dp,
+                        start = circle.absoluteLeft,
+                        startMargin = (-20).dp,
                         top = circle.top,
                         bottom = parent.bottom,
-                        end = parent.end,
+                        end = parent.absoluteRight,
                         verticalBias = 0.5F,
-                        horizontalBias = 0.1F
+                        horizontalBias = 0.35F
                     )
                 })
 
@@ -107,18 +116,3 @@ fun SplashScreen(coordinator: HalanCoordinator) {
     }
 }
 
-@Composable
-fun CircleView(modifier: Modifier, circleColor: Color) {
-    Canvas(modifier = modifier) {
-        drawCircle(color = circleColor)
-    }
-}
-
-@Composable
-private fun LinearProgressBar(modifier: Modifier, color: Color, backgroundColor: Color) {
-    LinearProgressIndicator(
-        color = LoadingIndicatorColor,
-        backgroundColor = LoadingIndicatorBackgroundColor,
-        modifier = modifier
-    )
-}

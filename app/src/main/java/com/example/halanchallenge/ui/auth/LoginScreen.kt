@@ -1,84 +1,69 @@
 package com.example.halanchallenge.ui.auth
 
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.ExperimentalUnitApi
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.example.halanchallenge.BuildConfig
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.halanchallenge.R
 import com.example.halanchallenge.app.coordinator.HalanCoordinator
-import com.example.halanchallenge.ui.splash.CircleView
-import com.example.halanchallenge.ui.theme.DarkBlue
-import com.example.halanchallenge.ui.theme.EditTextColor
-import com.example.halanchallenge.ui.theme.LabelTextColor
-import com.example.halanchallenge.ui.theme.LightGreen
-import kotlin.math.log
+import com.example.halanchallenge.ui.base.HalanLogoView
+import com.example.halanchallenge.ui.theme.*
+import kotlin.math.sin
 
 @OptIn(ExperimentalUnitApi::class)
 @Composable
 fun LoginScreen(coordinator: HalanCoordinator) {
+    val vm: LoginViewModel = viewModel()
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
         val (halan, username, password, loginButton) = createRefs()
-        val usernameValue = remember {
-            TextFieldValue()
-        }
-        val passwordValue = remember {
-            TextFieldValue()
-        }
-        val passwordVisibility = remember { mutableStateOf(true) }
-
         HalanLogoView(modifier = Modifier.constrainAs(halan) {
             top.linkTo(parent.top)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
         })
-        OutlinedTextField(usernameValue,
-            { value: TextFieldValue ->
+        OutlinedTextField(vm.usernameValue.value,
+            { value: String ->
+                vm.usernameValue.value = value
             },
             textStyle = MaterialTheme.typography.h1,
             label = {
                 Text(
-                    text = "Username",
+                    text = stringResource(id = R.string.user_name),
                     style = MaterialTheme.typography.subtitle1,
                     color = EditTextColor,
-                    fontSize = TextUnit(17F, TextUnitType.Sp)
+                    fontSize = _17SP
                 )
             },
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = LightGreen,
                 unfocusedBorderColor = LightGreen,
-                cursorColor = LightGreen
+                cursorColor = LightGreen,
             ),
+            isError = vm.usernameError.value,
+            singleLine = true,
+            maxLines = 1,
             placeholder = {
                 Text(
-                    text = "Likes , MohammedMorse",
+                    text = stringResource(id = R.string.user_name_example),
                     style = MaterialTheme.typography.subtitle1,
                     color = LabelTextColor,
-                    fontSize = TextUnit(15F, TextUnitType.Sp)
+                    fontSize = _15SP
                 )
             },
-            shape = RoundedCornerShape(10.dp),
+            shape = MaterialTheme.shapes.medium,
             modifier = Modifier
                 .constrainAs(username) {
                     linkTo(
@@ -88,20 +73,22 @@ fun LoginScreen(coordinator: HalanCoordinator) {
                         start = parent.start,
                         end = parent.end,
                     )
-                    height = Dimension.percent(0.1F)
+                    height = Dimension.percent(0.09F)
                 }
                 .fillMaxWidth(0.9F)
         )
-        OutlinedTextField(passwordValue,
-            { value: TextFieldValue ->
+
+        OutlinedTextField(vm.passwordValue.value,
+            { value: String ->
+                vm.passwordValue.value = value
             },
             textStyle = MaterialTheme.typography.h1,
             label = {
                 Text(
-                    text = "Password",
+                    text = stringResource(id = R.string.password),
                     style = MaterialTheme.typography.subtitle1,
                     color = EditTextColor,
-                    fontSize = TextUnit(17F, TextUnitType.Sp)
+                    fontSize = _17SP
                 )
             },
             colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -110,13 +97,15 @@ fun LoginScreen(coordinator: HalanCoordinator) {
                 cursorColor = LightGreen
             ),
             trailingIcon = {
-                val icon = if (passwordVisibility.value) {
+                val icon = if (vm.passwordVisibility.value) {
                     R.drawable.ic_show_password_fill
                 } else {
                     R.drawable.ic_hide_password_fill
                 }
 
-                IconButton(onClick = { passwordVisibility.value = !passwordVisibility.value }) {
+                IconButton(onClick = {
+                    vm.passwordVisibility.value = !vm.passwordVisibility.value
+                }) {
                     Icon(
                         painter = painterResource(id = icon),
                         contentDescription = "Visibility",
@@ -124,20 +113,21 @@ fun LoginScreen(coordinator: HalanCoordinator) {
                     )
                 }
             },
-            visualTransformation = if (passwordVisibility.value) VisualTransformation.None else PasswordVisualTransformation(),
+            visualTransformation = if (vm.passwordVisibility.value) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Characters,
                 keyboardType = KeyboardType.Password
             ),
+            isError = vm.passwordError.value,
             placeholder = {
                 Text(
-                    text = "123xxxxxxxx",
+                    text = stringResource(id = R.string.password_example),
                     style = MaterialTheme.typography.subtitle1,
                     color = LabelTextColor,
-                    fontSize = TextUnit(15F, TextUnitType.Sp)
+                    fontSize = _15SP
                 )
             },
-            shape = RoundedCornerShape(10.dp),
+            shape = MaterialTheme.shapes.medium,
             modifier = Modifier
                 .constrainAs(password) {
                     top.linkTo(username.bottom, 10.dp)
@@ -145,7 +135,7 @@ fun LoginScreen(coordinator: HalanCoordinator) {
                         start = parent.start,
                         end = parent.end
                     )
-                    height = Dimension.percent(0.1F)
+                    height = Dimension.percent(0.09F)
                 }
                 .fillMaxWidth(0.9F)
         )
@@ -156,69 +146,18 @@ fun LoginScreen(coordinator: HalanCoordinator) {
                     bottom.linkTo(parent.bottom, 50.dp)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                }, onClick = { }, shape = RoundedCornerShape(5.dp),
+                }, onClick = { }, shape = MaterialTheme.shapes.small,
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = LightGreen,
                 disabledBackgroundColor = Color.Gray
             )
         ) {
             Text(
-                text = "Login",
+                text = stringResource(id = R.string.login),
                 style = MaterialTheme.typography.button,
-                fontSize = TextUnit(20F, TextUnitType.Sp),
+                fontSize = _20SP,
                 color = Color.White
             )
         }
     }
 }
-
-@OptIn(ExperimentalUnitApi::class)
-@Composable
-fun HalanLogoView(modifier: Modifier) {
-    ConstraintLayout(modifier = modifier) {
-        val (circle, arabic, english) = createRefs()
-        CircleView(
-            modifier = Modifier
-                .fillMaxWidth(0.4F)
-                .fillMaxHeight(0.2F)
-                .constrainAs(circle) {
-                    top.linkTo(parent.top, 10.dp)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                }, circleColor = LightGreen
-        )
-
-        Text(
-            text = BuildConfig.RIGHT,
-            style = MaterialTheme.typography.h1,
-            color = DarkBlue,
-            fontSize = TextUnit(55F, TextUnitType.Sp),
-            modifier = Modifier.constrainAs(arabic) {
-                top.linkTo(circle.top, (-60).dp)
-                bottom.linkTo(circle.bottom)
-                end.linkTo(circle.end, (-20).dp)
-            }
-        )
-
-        Text(
-            text = BuildConfig.LEFT,
-            style = MaterialTheme.typography.h1,
-            color = DarkBlue,
-            fontSize = TextUnit(45F, TextUnitType.Sp),
-            modifier = Modifier
-                .constrainAs(english) {
-                    top.linkTo(circle.top, 30.dp)
-                    bottom.linkTo(circle.bottom)
-                    linkTo(
-                        start = circle.start,
-                        end = circle.end,
-                        bias = 0F,
-                        startMargin = (-20).dp
-                    )
-                }
-        )
-
-    }
-}
-
-

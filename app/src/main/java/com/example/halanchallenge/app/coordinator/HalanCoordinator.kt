@@ -1,6 +1,7 @@
 package com.example.halanchallenge.app.coordinator
 
 import androidx.navigation.NavHostController
+import kotlinx.coroutines.delay
 
 
 class HalanCoordinator private constructor(private val navHostController: NavHostController) {
@@ -16,10 +17,20 @@ class HalanCoordinator private constructor(private val navHostController: NavHos
         restoreState = restoringState
         launchSingleTop = launchingSingleTop
         if (closeCurrent) {
-            popUpTo(direction.name) {
-                inclusive = true
+            popUpTo(Directions.SplashDirection.name) {
+                inclusive = closeCurrent
             }
         }
+    }
+
+    suspend fun navigateAfter(
+        time: Long, direction: Directions,
+        closeCurrent: Boolean = false,
+        restoringState: Boolean = false,
+        launchingSingleTop: Boolean = false
+    ) {
+        delay(time)
+        navigate(direction, closeCurrent, restoringState, launchingSingleTop)
     }
 
     fun back() {
