@@ -84,7 +84,7 @@ fun LoginScreen(coordinator: HalanCoordinator) {
                     linkTo(
                         top = halan.bottom,
                         bottom = loginButton.top,
-                        verticalBias = 0.3F,
+                        verticalBias = 0.15F,
                         start = parent.start,
                         end = parent.end,
                     )

@@ -1,5 +1,6 @@
 package com.example.halanchallenge.ui.splash
 
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +25,24 @@ import com.example.halanchallenge.ui.theme.*
 
 @OptIn(ExperimentalUnitApi::class)
 @Composable
-fun SplashScreen( coordinator: HalanCoordinator ) {
+fun SplashScreen(coordinator: HalanCoordinator) {
+    val scaleCircleAnimation = rememberInfiniteTransition()
+    val circleWidthSize = scaleCircleAnimation.animateFloat(
+        initialValue = 0.0F,
+        targetValue = 0.7F,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1000, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+    val circleHeightSize = scaleCircleAnimation.animateFloat(
+        initialValue = 0.0F,
+        targetValue = 0.8F,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1000, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
@@ -42,8 +60,9 @@ fun SplashScreen( coordinator: HalanCoordinator ) {
                         top = parent.top,
                         verticalBias = 0.4F
                     )
-                    width = Dimension.percent(0.7F)
-                    height = Dimension.percent(0.8F)
+
+                    width = Dimension.percent(circleWidthSize.value)
+                    height = Dimension.percent(circleHeightSize.value)
                 },
             circleColor = LightGreen
         )
@@ -69,7 +88,7 @@ fun SplashScreen( coordinator: HalanCoordinator ) {
                         startMargin = (-30).dp,
                         top = circle.top,
                         bottom = parent.bottom,
-                        end = parent.end ,
+                        end = parent.end,
                         verticalBias = 0.5F,
                         horizontalBias = 0.1F
                     )

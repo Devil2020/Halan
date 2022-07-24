@@ -14,7 +14,7 @@ import com.example.halanchallenge.ui.splash.SplashScreen
 fun HalanNavHost(coordinator: HalanCoordinator) {
     NavHost(
         navController = coordinator.getNavController(),
-        startDestination = Directions.AuthenticationDirection.name
+        startDestination = Directions.SplashDirection.name
     ) {
         composable(Directions.SplashDirection.name) {
             SplashScreen(coordinator)
