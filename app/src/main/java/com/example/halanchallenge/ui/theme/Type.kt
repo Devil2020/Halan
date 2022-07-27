@@ -79,5 +79,5 @@ val HalanTypography = Typography(
         fontWeight = FontWeight.SemiBold,
         fontSize = 12.sp,
         letterSpacing = 1.sp
-    )
+    ) ,
 )

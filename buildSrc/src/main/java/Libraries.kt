@@ -150,7 +150,8 @@ object DI {
 
     val Koin = arrayListOf(
         "io.insert-koin:koin-core:${Versions.DI.KoinVersion}",
-        "io.insert-koin:koin-android:${Versions.DI.KoinVersion}"
+        "io.insert-koin:koin-android:${Versions.DI.KoinVersion}" ,
+        "io.insert-koin:koin-androidx-compose:${Versions.DI.KoinVersion}"
     )
 
 }

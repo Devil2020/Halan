@@ -15,6 +15,7 @@ import com.example.halanchallenge.local.SharedPreferenceLocalGateway
 import com.example.halanchallenge.local.SharedPreferencesManager
 import com.example.halanchallenge.remote.RetrofitCore
 import com.example.halanchallenge.remote.RetrofitRemoteGateway
+import com.example.halanchallenge.ui.auth.LoginViewModel
 import com.example.halanchallenge.utils.base.Constants
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -52,5 +53,5 @@ private val DomainAndDataModule = module {
 }
 
 private val PresentationModule = module {
-
+    viewModel { LoginViewModel(get()) }
 }

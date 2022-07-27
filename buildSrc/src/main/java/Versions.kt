@@ -74,7 +74,7 @@ object Versions {
     }
 
     object DI {
-        const val KoinVersion= "3.1.5"
+        const val KoinVersion= "3.2.0"
     }
 
 }

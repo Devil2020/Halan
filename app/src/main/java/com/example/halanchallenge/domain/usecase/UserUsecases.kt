@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.*
 
 abstract class IUserGateway : UseCase() {
     /*We must to make the validation for the login here , if the username valid or not*/
-    abstract fun executeLoginUseCase(request: LoginRequest): Flow<LoginResponse>
+    abstract fun executeLoginUseCase(userName: String, password: String): Flow<LoginResponse>
     abstract fun executeSaveTokenUseCase(token: String)
     abstract fun executeLoadTokenUseCase(): String
     abstract fun executeLogoutUseCase()
@@ -20,12 +20,12 @@ abstract class IUserGateway : UseCase() {
 
 class UserGateway(private val repository: IUserRepository) : IUserGateway() {
 
-    override fun executeLoginUseCase(request: LoginRequest): Flow<LoginResponse> {
-        return if (InputValidator.isUsernameValid(request.username) && InputValidator.isPasswordValid(
-                request.password
+    override fun executeLoginUseCase(userName: String, password: String): Flow<LoginResponse> {
+        return if (InputValidator.isUsernameValid(userName) && InputValidator.isPasswordValid(
+                password
             )
         )
-            executeUseCase { repository.loginUser(request) }
+            executeUseCase { repository.loginUser(LoginRequest(userName, password)) }
         else
             flowOf()
     }
